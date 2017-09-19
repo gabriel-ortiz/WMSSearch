@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:300i,400,400i,500,800');
+
+html{
+    font-family: 'Raleway', sans-serif !important;
+      overflow-y: scroll;
+}
+
+//color variables
+$main-color-box: #efefef;
+$main-hover-color: #ccc;
+
+
+//breakpoints:
+$mobile-width: 480px;
+$tablet-width: 768px;
+$desktop-width: 1024px;
+
+//gutter
+$gutter: 18px;
+
+//columns
+$columns : 12;

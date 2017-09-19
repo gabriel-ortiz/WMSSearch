@@ -1,0 +1,129 @@
+x0:bookANDx4:digital
+
+discovery office hours
+
+https://ccl.on.worldcat.org/search?
+sortKey=
+&databaseList=
+&queryString=kw%3Ajquery
+&Facet=format
+&Facets=on
+&scope=
+	&format=Book
+	&database=all
+	&author=all
+	&year=all
+	&yearFrom=
+	&yearTo=
+	&language=all
+	&topic=all
+
+
+
+https://ccl.on.worldcat.org/search?
+sortKey=
+&databaseList=
+&queryString=jquery
+&changedFacet=scope
+&stickyFacetsChecked=on
+	&scope=wz%3A519
+	&format=Book
+	&database=all
+	&author=all
+	&year=all
+	&yearFrom=
+	&yearTo=
+	&language=all
+	&topic=all
+
+
+https://ccl.on.worldcat.org/search?
+sortKey=
+&databaseList=
+&queryString=jquery
+&Facet=scope
+&stickyFacetsChecked=on
+	&scope=wz%3A519
+	&format=Book
+	&database=all
+	&author=all
+	&year=all
+	&yearFrom=
+	&yearTo=
+	&language=all
+	&topic=all
+
+https://ccl.on.worldcat.org/search?
+sortKey=
+&databaseList=
+&queryString=jquery
+&Facet=on
+	&scope=wz%3A519
+	&format=Book
+	&database=all
+	&author=all
+	&year=all
+	&yearFrom=
+	&yearTo=
+	&language=all
+	&topic=all
+	
+	https://ccl.on.worldcat.org/search?
+	queryString=kw%3Acitrus
+	&databaseList=1708%2C239%2C245%2C251%2C638
+	&origPageViewName=pages%2Fadvanced-search-page
+	&subscope=wz%3A519%3A%3Azs%3A36307
+
+
+https://ccl.on.worldcat.org/search?
+	queryString=kw%3Abach+AND+x0%3Amsscr
+	&databaseList=239%2C1708%2C638%2C245%2C251
+	&origPageViewName=pages%2Fadvanced-search-page&scope=
+
+
+https://ccl.on.worldcat.org/search?
+sortKey=
+&databaseList=1708%2C239%2C245%2C251%2C638
+&queryString=kw%3Acitrus
+&changedFacet=
+scope&subscope=wz%3A519%3A%3Azs%3A36307
+&format=all
+&database=all
+&author=all
+&year=all
+&yearFrom=
+&yearTo=
+&language=all
+&topic=all
+
+https://ccl.on.worldcat.org/search?
+sortKey=LIBRARY
+&databaseList=
+&queryString=kw%3Acitrus
+&Facet=
+&scope&subscope=wz%3A519
+&format=all
+&database=
+&author=
+&year=
+&yearFrom=
+&yearTo=
+&language=
+&topic=
+
+	
+	
+	//SELECT OPTIONS AND HIDE OPTION AFTER SELECTION
+$(".drop-down .options ul li a").click(function() {
+    var text = $(this).html();
+    $(".drop-down .selected a span").html(text);
+    $(".drop-down .options ul").hide();
+}); 
+
+
+//HIDE OPTIONS IF CLICKED ANYWHERE ELSE ON PAGE
+$(document).bind('click', function(e) {
+    var $clicked = $(e.target);
+    if (! $clicked.parents().hasClass("drop-down"))
+        $(".drop-down .options ul").hide();
+});

@@ -1,0 +1,192 @@
+
+
+.loadWMS{
+
+}
+
+.wms-c-search_fields{
+    box-sizing: border-box;
+    padding: 5px;
+    margin: 5px;
+}
+
+
+#wms-c-input{
+    flex: 3;
+}
+
+#wms-c-attribute{
+    flex: 1;
+}
+
+#wms-c-sources{
+    flex: 1;
+}
+
+#wms-c-search_button{
+    flex: 1;
+}
+
+
+// Container
+// ---------------------------------- //
+.wms-l-container {
+    @include wms-l-container;
+}
+
+//set baseline for all wms-l classes
+[class*="wms-l-span-"] {
+    flex-grow: 0;
+    flex-basis: 100%;
+}
+
+// Column
+// ---------------------------------- //
+.wms-l-column {
+    @include wms-l-column;
+}
+
+// Column
+// ---------------------------------- //
+.wms-l-row {
+    @include wms-l-row;
+}
+
+
+//set baseline for all wms-l classes
+[class*="wms-l-span-"] {
+    flex-grow: 0;
+    flex-basis: 100%;
+}
+
+
+.wms-l-span-quarter {
+    flex-basis: 25%;
+}
+.wms-l-span-third {
+    flex-basis: 33.333%;
+}
+.wms-l-span-half {
+    flex-basis: 50%;
+}
+.wms-l-span-two-thirds {
+    flex-basis: 66.666%;
+}
+.wms-l-span-three-quarters {
+    flex-basis: 75%;
+}
+.wms-l-span-full {
+    flex-basis: 100%;
+}
+
+@include media($mobile-width) {
+    .wms-l-span-quarter-sm {
+        flex-basis: 25%;
+    }
+    .wms-l-span-third-sm {
+        flex-basis: 33.333%;
+    }
+    .wms-l-span-half-sm {
+        flex-basis: 50%;
+    }
+    .wms-l-span-two-thirds-sm {
+        flex-basis: 66.666%;
+    }
+    .wms-l-span-three-quarters-sm {
+        flex-basis: 75%;
+    }
+    .wms-l-span-full-sm {
+        flex-basis: 100%;
+    }
+}
+
+@include media($tablet-width) {
+    .wms-l-span-quarter-md {
+        flex-basis: 25%;
+    }
+    .wms-l-span-third-md {
+        flex-basis: 33.333%;
+    }
+    .wms-l-span-half-md {
+        flex-basis: 50%;
+    }
+    .wms-l-span-two-thirds-md {
+        flex-basis: 66.666%;
+    }
+    .wms-l-span-three-quarters-md {
+        flex-basis: 75%;
+    }
+    .wms-l-span-full-md {
+        flex-basis: 100%;
+    }
+}
+
+@include media($desktop-width) {
+    .wms-l-span-quarter-lg {
+        flex-basis: 25%;
+    }
+    .wms-l-span-third-lg {
+        flex-basis: 33.333%;
+    }
+    .wms-l-span-half-lg {
+        flex-basis: 50%;
+    }
+    .wms-l-span-two-thirds-lg {
+        flex-basis: 66.666%;
+    }
+    .wms-l-span-full-lg {
+        flex-basis: 100%;
+    }
+    
+}
+
+// Grid Column Spans
+// ---------------------------------- //
+
+@for $i from 1 through $columns {
+
+    .wms-l-span-#{$i} {
+        flex-basis: wms-span( $i );
+    }
+
+}
+
+@for $i from 1 through $columns {
+
+    @include media($mobile-width) {
+        .wms-l-span-#{$i}-sm {
+            flex-basis: wms-span( $i );
+        }
+    }
+
+}
+
+@for $i from 1 through $columns {
+
+    @include media($tablet-width) {
+        .wms-l-span-#{$i}-md {
+            flex-basis: wms-span( $i );
+        }
+    }
+
+}
+
+@for $i from 1 through $columns {
+
+    @include media($desktop-width) {
+        .wms-l-span-#{$i}-lg {
+            flex-basis: wms-span( $i );
+        }
+    }
+
+}
+
+// @for $i from 1 through $columns {
+
+//     @include media($xl) {
+//         .wms-l-span-#{$i}-xl {
+//             flex-basis: wms-span( $i );
+//         }
+//     }
+
+// }

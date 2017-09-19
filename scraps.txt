@@ -1,0 +1,45 @@
+        /**********************************
+         * 
+         *********************************/
+        
+        var wms_search_row_2 = $('<div />')
+                                    .addClass('columns wms-row');
+                                    
+        //div.wms-dropdown - outer level div    
+        var wms_attr_dropdown = $('<div />')
+                                    .addClass('column is-3 wms-dropdown wms-search')
+                                    .append(
+                                        //div.wms-c-selected
+                                        $('<div />')
+                                            .addClass('wms-c-selected')
+                                            // first span with prompt and dropdown arrow
+                                            .append(
+                                                $('<span />')
+                                                    .addClass('wms-prompt')
+                                                    .text('AS: ')
+                                                )
+                                                //div.wms-selected-item - second span for data and selected content
+                                            .append(
+                                                $('<span />')
+                                                    .addClass('wms-selected-item')
+                                                    .data('search_attr', 'selected')
+                                                    .text('I am selected text')
+                                                )
+                                        );
+        //div.wms-items
+        var wms_attr_dropdown_items = $('<div />')
+                                            .addClass('wms-items')
+                                            .append(
+                                                //ul.wms-list-options
+                                                $('<ul />').addClass('wms-list-options')
+                                                    .append(
+                                                        //this will list out the options to be selected
+                                                        $('<li />').addClass('wms-select_attr').attr('data-wms_attr', 'kw:').text('Keyword')
+                                                        )
+                                                );
+                                                
+        
+        //append dropdown items to div.wms-l-column wms-l-span-3-md wms-dropdown wms-search
+        wms_attr_dropdown.append(wms_attr_dropdown_items);
+        //append everything to the second row
+        wms_search_row_2.append(wms_attr_dropdown);

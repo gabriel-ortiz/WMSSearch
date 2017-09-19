@@ -1,0 +1,120 @@
+
+/* General dropdown styles */       
+.dropdown dd,
+.dropdown dt,
+.dropdown ul {
+    margin:0px; padding:0px; 
+    
+}
+
+.wms-c-title{
+    padding-left: 1em;
+    box-sizing: border-box;
+}
+
+#wms-c-keyword{
+        width: 100%;
+
+    }
+    
+.wms-search{
+    position: relative;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 1px solid #ccc;
+}
+
+
+.wms-dropdown{
+    background: white;
+    transition: background-color 0.5s ease;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;  
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0;
+    
+    &:hover,
+    &:focus{
+        background-color: $main-hover-color;
+    }
+    
+    
+    .wms-c-selected {
+        flex-grow: 1;
+        flex-shrink: 1;
+        height: 100%;
+        padding: 1em;
+        box-sizing: border-box;
+    }
+    
+    //sample items
+    .wms-items{
+        position: relative;
+        width: 100%;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    
+
+    /* DT styles for sliding doors */    
+    .wms-prompt{
+        display:inline-block; 
+        text-decoration: none;
+        padding-right: .5em;
+        
+        a{
+            text-decoration: none;
+            
+            span{
+                cursor:pointer; 
+                display:block; 
+                padding:5px;
+            }            
+        } 
+    
+        &:after{
+            content: '\276F';
+            display: inline-block;
+            transform: rotate(90deg);
+            margin-left: .3em;
+            
+        }
+    
+    }
+    
+    /* UL styles */    
+    .wms-items .wms-list-options{
+        background: $main-color-box; 
+        display:none;
+        list-style:none; 
+        position: absolute;
+        width: 100%;
+        margin: 0;
+        padding: 1em;
+        box-sizing: border-box;
+        z-index: 100;
+        
+        li{
+            &:hover,
+            &:focus{
+                background: #efefef;
+                color: white;
+            }
+        }
+    }
+    
+    span.value{
+        display: none;
+    }
+
+
+}
+
+#wms-submit{
+    width: 100%;
+    height: 100%;
+}

@@ -1,0 +1,100 @@
+
+
+// Grid Container
+// ------------------------------------- //
+// Clearfix
+// ------------------------------------- //
+@mixin wms-clearfix {
+    &:before,
+	&:after {
+		content: "";
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
+}
+
+
+@mixin wms-l-container {
+   @include wms-clearfix;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 80%;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+}
+
+// Grid row
+// ------------------------------------- //
+@mixin wms-l-row {
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    align-items: center;
+    width: 100%;
+    
+    &.wms-is-nowrap {
+        flex-wrap: nowrap;
+    }
+}
+
+
+// Grid column
+// ------------------------------------- //
+@mixin wms-l-column {
+    flex-basis: 0;
+    flex-grow: 1;
+    flex-shrink: 1;
+    max-width: 100%;
+}
+
+
+// Media queries
+// ------------------------------------- //
+@mixin media($size, $minmax: min) {
+    @media screen and (#{$minmax}-width: $size) {
+        @content;
+    }
+}
+
+
+
+@mixin mobile {
+  @media screen and (min-width: #{$mobile-width}) {
+    @content;
+  }
+}
+
+
+@mixin tablet {
+  @media screen and (min-width: #{$tablet-width}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (min-width: #{$desktop-width}) {
+    @content;
+  }
+}
+
+
+/*
+ * Return a calculated span value for grid columns 
+ *
+ * $span: (int) grid columns to span
+ * $columns: (int) total columns
+ *
+ * returns: a calc() value;
+ */
+@function wms-span( $span, $total-columns: $columns ) {
+    
+    $ratio: $span / $total-columns;
+    @if ( $ratio > 1 ) {
+        $ratio: 1;
+    }
+    //$calc: calc( #{ $ratio * 100% } - #{ $gutter } );
+    $calc: #{ $ratio * 100% };
+    @return $calc;
+};
