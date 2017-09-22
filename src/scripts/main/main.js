@@ -242,7 +242,7 @@
                 queryString     : input_array['attr'],
                 Facet           : '',
                 tricky_scope    : plugin.options.scope != '' ? plugin.options.scope     : input_array['src'] ,
-                format          : plugin.options.format != '' ? plugin.options.format   : input_array['frmt'],
+                trick_format    : plugin.options.format != '' ? plugin.options.format   : input_array['frmt'],
                 database        : plugin.options.database,
                 author          : plugin.options.author,
                 year            : plugin.options.year,
@@ -255,6 +255,7 @@
                //so here we've got to replace the scope 
                 var clean_plugin = plugin.options.wms_base_url + $.param(wms_params);
                 clean_plugin = clean_plugin.replace('&tricky_scope', "scope&subscope");
+                clean_plugin = clean_plugin.replace('&tricky_format', "format&subformat");                
                 return clean_plugin;
             
         };
@@ -285,7 +286,7 @@
 
                 })
                 //hide dropdown 
-                .on('click mouseout', this, function(event){
+                .on('click', this, function(event){
                     var $clicked = $(event.target);
                     //console.log($clicked.parents());
                     if ( $clicked.parents('.wms-dropdown').length == 0 ){
@@ -339,14 +340,10 @@
                         
                     });
                     
-                    
-                    console.log( scoped_search );
-                    //clear variables
-
-                    
                    var  wms_url = construct_url(scoped_search);
                    console.log(wms_url);
                    
+                    //clear the variables
                     scoped_search = [];
                     selected_search_elements = '';
                 });

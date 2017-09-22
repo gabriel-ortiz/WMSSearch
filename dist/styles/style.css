@@ -9854,7 +9854,7 @@ label.panel-block:hover {
   z-index: 100;
 }
 .wms-dropdown .wms-items .wms-list-options li:hover, .wms-dropdown .wms-items .wms-list-options li:focus {
-  background: #efefef;
+  background: #ccc;
   color: white;
 }
 .wms-dropdown span.value {
