@@ -3,6 +3,10 @@
 Custom styles in Sass for WMS Searchbox
 
 */
+html {
+  overflow-y: scroll;
+}
+
 @keyframes spinAround {
   from {
     transform: rotate(0deg);

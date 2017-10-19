@@ -29,9 +29,9 @@
         var column_width;
         var search_width;
         //change column width if searchbox only
-        if( plugin.options.scoped_search_settings.scoped_searchbox == true ){
+        if( plugin.options.scoped_search_settings.scoped_searchbox === true ){
             search_width = 'col--md-6';
-            column_width = 'col--md-2';
+            column_width = 'col--md-3';
         }else{
             search_width = 'col--md-10';
             column_width = 'col--md-3';                
@@ -67,7 +67,7 @@
                                                     name        : 'keyword',
                                                     placeholder : 'Start typing your search'
                                                     })
-                                                    .addClass('col col--md-8 wms-search wms-c-keyword')
+                                                    .addClass('col '+ search_width + ' wms-search wms-c-keyword')
                                             );
 
         // first level searchbox
@@ -277,12 +277,19 @@
             var search_string, format_key, source_location, source_key, format_value;
             
             //if scoped searchbox is turned on, the append the scope to string
-            if( plugin.options.scoped_search_settings.scoped_searchbox == true ){
+            if( plugin.options.scoped_search_settings.scoped_searchbox === true && plugin.options.scoped_search_settings.scoped_search_scoping == '' ){
+
+                search_string = input_array['attr'];
+                
+                source_location = plugin.options.scoped_search_settings.scoped_search_location;
+                
+            }else if ( plugin.options.scoped_search_settings.scoped_searchbox === true){
+                
                 search_string = "(" + plugin.options.scoped_search_settings.scoped_search_scoping +") " + plugin.options.scoped_search_settings.scoped_search_boolean +" "+ input_array['attr'];
                 
                 source_location = plugin.options.scoped_search_settings.scoped_search_location;
-
             }else{
+                
                 search_string = input_array['attr'];
                 
                 source_location = input_array['src'];
@@ -316,12 +323,12 @@
                 Facet           : '',
                 //scope added below
                 //format added below
-                database        : plugin.options.additional_settings.database,
+                database        : plugin.options.additional_settings.database || 'all',
                 author          : plugin.options.additional_settings.author,
-                year            : plugin.options.additional_settings.year,
+                year            : plugin.options.additional_settings.year || 'all',
                 yearFrom        : plugin.options.additional_settings.yearFrom,
                 yearTo          : plugin.options.additional_settings.yearTo,
-                language        : plugin.options.additional_settings.language,
+                language        : plugin.options.additional_settings.language || 'all',
                 topic           : plugin.options.additional_settings.topic
                 };
                
@@ -342,7 +349,7 @@
             //this is the initializer  
 
             //check if scoped search has been activiated
-            if( plugin.options.scoped_search_settings.scoped_searchbox == true ){
+            if( plugin.options.scoped_search_settings.scoped_searchbox === true ){
                 //create attribute search module
                 var attr_search_single = generate_search_field( 'attr' , 'AS', default_search_attrs, plugin.options.additional_settings.omit_attributes );
                 
@@ -355,8 +362,6 @@
                     .addClass("grid grid--container")
                     .append(wms_scoped_row_desc, wms_scoped_row_search_input); 
                     
-                    
-                
             }else{
                 //run the full search functionality
                 //create variables for search modules
@@ -419,7 +424,7 @@
                     //create array of selected settings to be passed. only one query to the dom
                     var scoped_search = [];
                     
-                    if( plugin.options.scoped_search_settings.scoped_searchbox == true ){
+                    if( plugin.options.scoped_search_settings.scoped_searchbox === true ){
                         scoped_search['attr']   = selected_search_elements.attr('data-wms_attr') + ':' + search_input;
                         scoped_search['frmt']   = plugin.options.scoped_search_settingsscoped_search_format || 'all';
                         scoped_search['src']    = plugin.options.scoped_search_settings.scoped_search_scoping || '';
@@ -451,7 +456,7 @@
                 
             //close the dropdown if user clicks somwehere else    
             $('body').on('click', function(event){
-                        if( $(event.target).parents('.wms-dropdown').length == 0 ){
+                        if( $(event.target).parents('.wms-dropdown').length === 0 ){
                             $('.wms-list-options').slideUp('fast');
                             $('.wms-arrow__toggle').removeClass('toggle-up');
                         }
