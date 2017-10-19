@@ -1,16 +1,22 @@
-//This is a starter template for writing plugins
+/**
+ * WMS Searchbox plugin
+ * Author: Gabriel Ortiz
+ * College: Claremont Colleges Library
+ * Output: A general fully customizable search box or a scoped searchbox
+ * 
+ */
 
 (function($, window, document){
- 
+'use strict';
     $.WMSSearch = function(element, UserOptions){
-        
+
         var plugin = this;
         
         var $element = $(element),
              element = element;
              
         //this is public
-        plugin.options = $.extend( {}, $.fn.WMSSearch.options, UserOptions);             
+        plugin.options = $.extend( true, $.fn.WMSSearch.options, UserOptions);             
         
         
         /**
@@ -19,52 +25,90 @@
          * 
         */
         
-        // first lever search box
+        //column width
+        var column_width;
+        var search_width;
+        //change column width if searchbox only
+        if( plugin.options.scoped_search_settings.scoped_searchbox == true ){
+            search_width = 'col--md-6';
+            column_width = 'col--md-2';
+        }else{
+            search_width = 'col--md-10';
+            column_width = 'col--md-3';                
+        }        
+        
+        //single search row and input
+        var wms_scoped_row_desc = $('<div />')
+                                .addClass('row wms-row')
+                                .append(
+                                    //append full width column
+                                    $('<div />')
+                                        .addClass('col col--md-12')
+                                        .append(
+                                            $('<h3 />')
+                                                .addClass('wms-c-title')
+                                                .text("Search for " + plugin.options.scoped_search_settings.scoped_search_title)
+                                            )    
+                                        .append(
+                                            $('<div />')
+                                                .addClass('wms-c-scoped-description')
+                                                .text(plugin.options.scoped_search_settings.scoped_search_desc)
+                                            )                                            
+
+                                );
+        
+        //searchbox row input field goes here
+        var wms_scoped_row_search_input = $('<div />')
+                                            .addClass('row wms-row')
+                                            .append(
+                                                //add the search input for scoped
+                                                $('<input />'). attr({
+                                                    type        : 'text',
+                                                    name        : 'keyword',
+                                                    placeholder : 'Start typing your search'
+                                                    })
+                                                    .addClass('col col--md-8 wms-search wms-c-keyword')
+                                            );
+
+        // first level searchbox
         var wms_search_input = $('<div />')
-                                .addClass('columns wms-row')
+                                .addClass('row wms-row')
                                 .attr('id', 'wms-search-for')
                                 .append(
                                     $('<div />')
-                                        .addClass('column is-2')
+                                        .addClass('col col--md-2')
                                         .append(
-                                            $('<h2 />')
+                                            $('<h3 />')
                                                 .addClass('wms-c-title')
                                                 .text('Search For:')
                                             )
                                     )
                                 .append(
-                                    $('<div />')
-                                        .addClass('column is-10')
-                                        .append(
-                                            $('<input />'). attr({
-                                                id          : 'wms-c-keyword',
-                                                type        : 'text',
-                                                name        : 'keyword',
-                                                placeholder : 'Start typing your search'
-                                                })
-                                                .addClass('wms-search')                                            
-                                            )
+                                    //append search input field
+                                    $('<input />'). attr({
+                                        type        : 'text',
+                                        name        : 'keyword',
+                                        placeholder : 'Start typing your search'
+                                        })
+                                        .addClass("col " + search_width + " wms-search wms-c-keyword")                                            
+
                                     );
        
         //container for all the search settings
-        var wms_search_rows = $('<div />').addClass('columns wms-row').attr('id', 'wms-search-rows');
+        var wms_search_rows = $('<div />').addClass('row wms-row').attr('id', 'wms-search-rows');
                                    
         //submit button!
         var wms_search_submit = $('<div />')
-                                    .addClass('column is-3')
-                                    .attr('id', 'wms-search-button')
+                                    .addClass("col " + column_width + " wms-row")
                                     .append(
                                         $('<button />')
                                             .attr({
-                                                'id'    : 'wms-submit',
                                                 'type'  : 'submit'
                                             })
-                                            .addClass(' wms-button wms-search ')
+                                            .addClass(' wms-button wms-search wms-submit wms-search-button')
                                             .text('Search')
                                         );
-        
 
-            
             /**
              * 
              * WMS Search Attributes
@@ -78,7 +122,8 @@
                     {id: 'no', name: 'OCLC Number', paramater: 'no'},
                     {id: 'so', name: 'Journal Source', paramater: 'so'},
                     {id: 'yr', name: 'Year', paramater: 'yr'},
-                    {id: 'n2', name: 'ISSN', paramater: 'n2'}                
+                    {id: 'n2', name: 'ISSN', paramater: 'n2'},
+                    {id: 'nu', name: 'Call Number', paramater: 'nu'}                     
                 ];
             
             /**
@@ -108,7 +153,7 @@
          * omitted_select_options: list of objects from plugin settings
          */
         var generate_search_field = function( search_prefix, search_prompt, default_select_options, omitted_select_options) {
-            
+
             //check for omitted select items
             var updated_select_list = check_for_omited(default_select_options, omitted_select_options);
             
@@ -129,8 +174,6 @@
 
             });
             
-           // console.log('this is the primary field', selected_primary_field[0]);
-            
             //construct an array of options as an array
             $.each(updated_select_list, function(index, value){
                temp_li = $('<li />')
@@ -146,11 +189,9 @@
                 html_select_list.push( temp_li );
                 
             });
-            //console.log(html_select_list);
             
-
             var wms_search_column = $('<div />')
-                                        .addClass('column is-3 wms-row');
+                                        .addClass("col " + column_width + " wms-row");
                                         
             //div.wms-dropdown - outer level div    
             var wms_attr_dropdown = $('<div />')
@@ -168,12 +209,12 @@
                                                 .append(
                                                     $('<span />')
                                                         .addClass('wms-prompt')
-                                                        .text(search_prompt)
+                                                        .text(search_prompt + ":")
                                                     )
                                                     //div.wms-selected-item - second span for data and selected content
                                                 .append(
                                                     $('<span />')
-                                                        .addClass( 'wms-selected-item' )
+                                                        .addClass( 'wms-selected-item type-'+search_prefix )
                                                         .attr({
                                                             'data-wms_attr' : selected_primary_field[0].paramater,
                                                             'data-wms_type' : search_prefix
@@ -181,6 +222,11 @@
                                                         })
                                                         .text( selected_primary_field[0].name )
                                                     )
+                                                .append(
+                                                    $('<span />')
+                                                        .addClass('wms-arrow__toggle')
+                                                        .html('&#10097;')
+                                                    )  
                                             );
             //div.wms-items
             var wms_attr_dropdown_items = $('<div />')
@@ -219,79 +265,128 @@
                 });
             });
 
-            //console.log(plugin_defaults);
 
             //return new array            
             return plugin_defaults;
         };
     
-         // Public Method code
-        plugin.foo_public_method = function() {
-
-        };
-
 
         var construct_url = function(input_array){
+             
+             //define variables
+            var search_string, format_key, source_location, source_key, format_value;
             
-            //input_array[attr][frmt][src]
+            //if scoped searchbox is turned on, the append the scope to string
+            if( plugin.options.scoped_search_settings.scoped_searchbox == true ){
+                search_string = "(" + plugin.options.scoped_search_settings.scoped_search_scoping +") " + plugin.options.scoped_search_settings.scoped_search_boolean +" "+ input_array['attr'];
+                
+                source_location = plugin.options.scoped_search_settings.scoped_search_location;
+
+            }else{
+                search_string = input_array['attr'];
+                
+                source_location = input_array['src'];
+            }
+            
+            
+            //check if subformat is set
+            if( input_array['frmt'].match( /(digital|dvd|artchap_artcl)/) 
+                && plugin.options.scoped_search_settings.scoped_searchbox !== true  ){
+                //check to see if frmt exists and contains subformat
+                format_key      = 'subformat';
+                format_value    = input_array['frmt'];
+            }else{
+                format_key      = 'format';
+                format_value    = input_array['frmt'];                
+            }            
+
+            //check if we are dealing with scope (another library collection)
+            if(source_location.match( /::zs:/) ){
+                source_key = 'subscope';
+            }else{
+                source_key = 'scope';
+            }
+            
             
             //build the URL
             var wms_params = {
-                sortKey         : plugin.options.sortKey,
-                databaseList    : plugin.options.databaseList,
-                queryString     : input_array['attr'],
+                sortKey         : plugin.options.defaults.sortKey,
+                databaseList    : plugin.options.defaults.databaseList,
+                queryString     : search_string,
                 Facet           : '',
-                tricky_scope    : plugin.options.scope != '' ? plugin.options.scope     : input_array['src'] ,
-                trick_format    : plugin.options.format != '' ? plugin.options.format   : input_array['frmt'],
-                database        : plugin.options.database,
-                author          : plugin.options.author,
-                year            : plugin.options.year,
-                yearFrom        : plugin.options.yearFrom,
-                yearTo          : plugin.options.yearTo,
-                language        : plugin.options.language,
-                topic           : plugin.options.topic
+                //scope added below
+                //format added below
+                database        : plugin.options.additional_settings.database,
+                author          : plugin.options.additional_settings.author,
+                year            : plugin.options.additional_settings.year,
+                yearFrom        : plugin.options.additional_settings.yearFrom,
+                yearTo          : plugin.options.additional_settings.yearTo,
+                language        : plugin.options.additional_settings.language,
+                topic           : plugin.options.additional_settings.topic
                 };
                
-               //so here we've got to replace the scope 
-                var clean_plugin = plugin.options.wms_base_url + $.param(wms_params);
-                clean_plugin = clean_plugin.replace('&tricky_scope', "scope&subscope");
-                clean_plugin = clean_plugin.replace('&tricky_format', "format&subformat");                
+               //add the format scoping outside of initial params
+                wms_params[source_key] = source_location;
+                wms_params[format_key] = format_value;
+                
+                
+               //so here we've got to replace encoded ampersands
+                var clean_plugin = plugin.options.defaults.wms_base_url + $.param(wms_params);
+                clean_plugin    = clean_plugin.replace('%26', "&");
+                
                 return clean_plugin;
             
         };
         
         plugin.controller = function(){
             //this is the initializer  
+
+            //check if scoped search has been activiated
+            if( plugin.options.scoped_search_settings.scoped_searchbox == true ){
+                //create attribute search module
+                var attr_search_single = generate_search_field( 'attr' , 'AS', default_search_attrs, plugin.options.additional_settings.omit_attributes );
+                
+                //append the search scoping to input row
+                wms_scoped_row_search_input
+                    .append(attr_search_single, wms_search_submit);
+                
+                //append to container
+                $element
+                    .addClass("grid grid--container")
+                    .append(wms_scoped_row_desc, wms_scoped_row_search_input); 
+                    
+                    
+                
+            }else{
+                //run the full search functionality
+                //create variables for search modules
+                var attr_search = generate_search_field( 'attr' , 'AS', default_search_attrs, plugin.options.additional_settings.omit_attributes );
+                var format_search = generate_search_field('frmt', 'FOR', default_search_formats , plugin.options.additional_settings.omit_formats  );
+                var source_search = generate_search_field('src', 'IN', plugin.options.defaults.collections, plugin.options.additional_settings.omit_collections);
+
+                
+                //add search options to the coontainer
+                wms_search_rows.append(attr_search, format_search, source_search, wms_search_submit);
+                //add everything to the target element
+                $element.append([wms_search_input, wms_search_rows]).addClass("grid grid--container");                
+            }
             
-            //create variables for search modules
-            var attr_search = generate_search_field( 'attr' , 'AS', default_search_attrs, plugin.options.omit_attributes );
-            var format_search = generate_search_field('frmt', 'FOR', default_search_formats , plugin.options.omit_formats  );
-            var source_search = generate_search_field('src', 'IN', plugin.options.collections, plugin.options.omit_collections);
-            
-            //add search options to the coontainer
-            wms_search_rows.append(attr_search, format_search, source_search, wms_search_submit);
-            //add everything to the target element
-            $element.append([wms_search_input, wms_search_rows]);
-            
-            $('body')
+
+            //event handlers for all actions, attached to container to ensure that DOM added elements will work
+            $element
                 //show dropdown
                 .on('keypress click', '.wms-dropdown' , function(event){
                     if(event.keyCode == 13 || event.type == 'click'){
                         var $this = $( this );
-                        console.log($this);
                         var selected_option = $this.find('.wms-list-options');
+                        var toggle_arrow = $this.find('.wms-arrow__toggle');
+                        toggle_arrow.toggleClass('toggle-up');
+                        $('.wms-arrow__toggle').not(toggle_arrow).removeClass('toggle-up');
+                        
                         selected_option.slideToggle('fast');
-                        $('.wms-list-options').not(selected_option).slideUp('fast');                       
+                        $('.wms-list-options').not(selected_option).slideUp('fast');                     
                     }
 
-                })
-                //hide dropdown 
-                .on('click', this, function(event){
-                    var $clicked = $(event.target);
-                    //console.log($clicked.parents());
-                    if ( $clicked.parents('.wms-dropdown').length == 0 ){
-                        $(".wms-list-options").slideUp('fast');
-                    }
                 })
                 //select the item from the options list and set as data in the selected item
                 .on('click keypress', 'li.wms-select_attr', function(event){
@@ -306,12 +401,11 @@
                             .find('.wms-selected-item')
                             .text( selected_attr_text )
                             .attr('data-wms_attr', selected_attr_data );
- 
                     }
 
                     
                 })
-                .on('click', '#wms-submit', function(event){
+                .on('click', '.wms-submit', function(event){
                     //ensure click event is cancelled
                     event.preventDefault();
                     //grab all elements
@@ -324,6 +418,13 @@
 
                     //create array of selected settings to be passed. only one query to the dom
                     var scoped_search = [];
+                    
+                    if( plugin.options.scoped_search_settings.scoped_searchbox == true ){
+                        scoped_search['attr']   = selected_search_elements.attr('data-wms_attr') + ':' + search_input;
+                        scoped_search['frmt']   = plugin.options.scoped_search_settingsscoped_search_format || 'all';
+                        scoped_search['src']    = plugin.options.scoped_search_settings.scoped_search_scoping || '';
+                    }
+                    
                     $.each(selected_search_elements, function(index, value){
                         if( $(value).attr('data-wms_type') == 'attr'){
                             scoped_search['attr'] = '';
@@ -347,6 +448,14 @@
                     scoped_search = [];
                     selected_search_elements = '';
                 });
+                
+            //close the dropdown if user clicks somwehere else    
+            $('body').on('click', function(event){
+                        if( $(event.target).parents('.wms-dropdown').length == 0 ){
+                            $('.wms-list-options').slideUp('fast');
+                            $('.wms-arrow__toggle').removeClass('toggle-up');
+                        }
+            });
     
                 
         };        
@@ -367,32 +476,39 @@
     
     
     $.fn.WMSSearch.options = {
-        search_box_only     : false,
-        wms_base_url        : 'https://ccl.on.worldcat.org/search?',
-        sortKey             : 'LIBRARY',
-        databaseList        : '',
-        scope               : '',
-        subscope            : '',
-        format              : '',
-        subFormat           : '',
-        database            : 'all', //required
-        author              : '',
-        year                : 'all', //required
-        yearFrom            : '',
-        yearTo              : '',
-        language            : 'all', //required
-        topic               : '', //topic may not be necessary
-        subject             : '',
-        collections         : [
-            {id: 'all', name: 'General Collections', paramater: 'wz:519', order:'primary'},
-            {id: 'spcl', name: 'Special Collections', paramater: 'wz:519::zs:36307'}            
-            
-        ],
-        omit_collections    : [],
-        omit_attributes     : ['n2'],
-        omit_formats        : ['music'],
-        searchbox_help      : 'Enter a keyword into the search box to get started',
-        search_attr_help    : 'What are you searching as? Attributes help you narrow your search',
-        search_source_attr  : 'Where would you like to search. Here are different collections materials to narrow your search'
+        defaults                :{
+            wms_base_url        : 'https://ccl.on.worldcat.org/search?',
+            sortKey             : 'LIBRARY',
+            databaseList        : '',
+            collections         : [
+                {id: 'all', name: 'General Collections', paramater: 'wz:519', order:'primary'},
+                {id: 'spcl', name: 'Special Collections', paramater: 'wz:519::zs:36307'}            
+            ]            
+        },
+        scoped_search_settings      : {
+            scoped_searchbox        : false,
+            scoped_search_title     : '',
+            scoped_search_desc      : '',
+            scoped_search_scoping   : '',
+            scoped_search_location  : '',
+            scoped_search_format    : 'all',
+            scoped_search_boolean   : 'AND'
+        },
+        additional_settings :{
+            database            : 'all', //required
+            author              : '',
+            year                : 'all', //required
+            yearFrom            : '',
+            yearTo              : '',
+            language            : 'all', //required
+            topic               : '', //topic may not be necessary
+    
+            omit_attributes     : ['n2'],
+            omit_formats        : ['music'],
+            omit_collections    : [],
+            searchbox_help      : 'Enter a keyword into the search box to get started',
+            search_attr_help    : 'What are you searching as? Attributes help you narrow your search',
+            search_source_attr  : 'Where would you like to search. Here are different collections materials to narrow your search'
+        }
     };
 })(jQuery, window, document);

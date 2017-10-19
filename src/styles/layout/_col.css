@@ -1,35 +1,26 @@
 /*
-Error: Undefined variable: "$main-hover-color".
-        on line 42 of /home/ubuntu/workspace/WMSSearch/src/styles/components/_components.scss
+Error: Undefined mixin 'variant'.
+        on line 7 of /home/ubuntu/workspace/WMSSearch/src/styles/components/_col.scss, in `variant'
+        from line 7 of /home/ubuntu/workspace/WMSSearch/src/styles/components/_col.scss
 
-37:     box-sizing: border-box;
-38:     padding: 0;
-39:     
-40:     &:hover,
-41:     &:focus{
-42:         background-color: $main-hover-color;
-43:     }
-44:     
-45:     
-46:     .wms-c-selected {
-47:         flex-grow: 1;
+2:   box-sizing: border-box;
+3:   flex: 0 0 100%;
+4:   max-width: 100%;
+5:   padding: 1rem .5rem 0 .5rem;
+6: 
+7:   @include variant(no-gutters) {
+8:     padding: 0;
+9:   }
+10: }
 
 Backtrace:
-/home/ubuntu/workspace/WMSSearch/src/styles/components/_components.scss:42
-/nix/store/zmisxnl63ica4zaviifixamr3xg27kzp-ruby-2.3.1-p0/lib/ruby/gems/2.3.0/gems/sass-3.4.23/lib/sass/script/tree/variable.rb:49:in `_perform'
-/nix/store/zmisxnl63ica4zaviifixamr3xg27kzp-ruby-2.3.1-p0/lib/ruby/gems/2.3.0/gems/sass-3.4.23/lib/sass/script/tree/node.rb:58:in `perform'
-/nix/store/zmisxnl63ica4zaviifixamr3xg27kzp-ruby-2.3.1-p0/lib/ruby/gems/2.3.0/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:397:in `visit_prop'
-/nix/store/zmisxnl63ica4zaviifixamr3xg27kzp-ruby-2.3.1-p0/lib/ruby/gems/2.3.0/gems/sass-3.4.23/lib/sass/tree/visitors/base.rb:36:in `visit'
-/nix/store/zmisxnl63ica4zaviifixamr3xg27kzp-ruby-2.3.1-p0/lib/ruby/gems/2.3.0/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:160:in `block in visit'
-/nix/store/zmisxnl63ica4zaviifixamr3xg27kzp-ruby-2.3.1-p0/lib/ruby/gems/2.3.0/gems/sass-3.4.23/lib/sass/stack.rb:79:in `block in with_base'
+/home/ubuntu/workspace/WMSSearch/src/styles/components/_col.scss:7:in `variant'
+/home/ubuntu/workspace/WMSSearch/src/styles/components/_col.scss:7
+/nix/store/zmisxnl63ica4zaviifixamr3xg27kzp-ruby-2.3.1-p0/lib/ruby/gems/2.3.0/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:351:in `block in visit_mixin'
+/nix/store/zmisxnl63ica4zaviifixamr3xg27kzp-ruby-2.3.1-p0/lib/ruby/gems/2.3.0/gems/sass-3.4.23/lib/sass/stack.rb:98:in `block in with_mixin'
 /nix/store/zmisxnl63ica4zaviifixamr3xg27kzp-ruby-2.3.1-p0/lib/ruby/gems/2.3.0/gems/sass-3.4.23/lib/sass/stack.rb:115:in `with_frame'
-/nix/store/zmisxnl63ica4zaviifixamr3xg27kzp-ruby-2.3.1-p0/lib/ruby/gems/2.3.0/gems/sass-3.4.23/lib/sass/stack.rb:79:in `with_base'
-/nix/store/zmisxnl63ica4zaviifixamr3xg27kzp-ruby-2.3.1-p0/lib/ruby/gems/2.3.0/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:160:in `visit'
-/nix/store/zmisxnl63ica4zaviifixamr3xg27kzp-ruby-2.3.1-p0/lib/ruby/gems/2.3.0/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:433:in `block (2 levels) in visit_rule'
-/nix/store/zmisxnl63ica4zaviifixamr3xg27kzp-ruby-2.3.1-p0/lib/ruby/gems/2.3.0/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:433:in `map'
-/nix/store/zmisxnl63ica4zaviifixamr3xg27kzp-ruby-2.3.1-p0/lib/ruby/gems/2.3.0/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:433:in `block in visit_rule'
-/nix/store/zmisxnl63ica4zaviifixamr3xg27kzp-ruby-2.3.1-p0/lib/ruby/gems/2.3.0/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:181:in `with_environment'
-/nix/store/zmisxnl63ica4zaviifixamr3xg27kzp-ruby-2.3.1-p0/lib/ruby/gems/2.3.0/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:431:in `visit_rule'
+/nix/store/zmisxnl63ica4zaviifixamr3xg27kzp-ruby-2.3.1-p0/lib/ruby/gems/2.3.0/gems/sass-3.4.23/lib/sass/stack.rb:98:in `with_mixin'
+/nix/store/zmisxnl63ica4zaviifixamr3xg27kzp-ruby-2.3.1-p0/lib/ruby/gems/2.3.0/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:349:in `visit_mixin'
 /nix/store/zmisxnl63ica4zaviifixamr3xg27kzp-ruby-2.3.1-p0/lib/ruby/gems/2.3.0/gems/sass-3.4.23/lib/sass/tree/visitors/base.rb:36:in `visit'
 /nix/store/zmisxnl63ica4zaviifixamr3xg27kzp-ruby-2.3.1-p0/lib/ruby/gems/2.3.0/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:160:in `block in visit'
 /nix/store/zmisxnl63ica4zaviifixamr3xg27kzp-ruby-2.3.1-p0/lib/ruby/gems/2.3.0/gems/sass-3.4.23/lib/sass/stack.rb:79:in `block in with_base'
@@ -76,4 +67,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$main-hover-color\".\A         on line 42 of /home/ubuntu/workspace/WMSSearch/src/styles/components/_components.scss\A \A 37:     box-sizing: border-box;\A 38:     padding: 0;\A 39:     \A 40:     &:hover,\A 41:     &:focus{\A 42:         background-color: $main-hover-color;\A 43:     }\A 44:     \A 45:     \A 46:     .wms-c-selected {\A 47:         flex-grow: 1;"; }
+  content: "Error: Undefined mixin 'variant'.\A         on line 7 of /home/ubuntu/workspace/WMSSearch/src/styles/components/_col.scss, in `variant'\A         from line 7 of /home/ubuntu/workspace/WMSSearch/src/styles/components/_col.scss\A \A 2:   box-sizing: border-box;\A 3:   flex: 0 0 100%;\A 4:   max-width: 100%;\A 5:   padding: 1rem .5rem 0 .5rem;\A 6: \A 7:   @include variant(no-gutters) {\A 8:     padding: 0;\A 9:   }\A 10: }"; }

@@ -1,22 +1,21 @@
 /*
 Error: Undefined mixin 'variant'.
-        on line 5 of /home/ubuntu/workspace/WMSSearch/src/styles/layout/_grid.scss, in `variant'
-        from line 5 of /home/ubuntu/workspace/WMSSearch/src/styles/layout/_grid.scss
+        on line 15 of /home/ubuntu/workspace/WMSSearch/src/styles/layout/_row.scss, in `variant'
+        from line 15 of /home/ubuntu/workspace/WMSSearch/src/styles/layout/_row.scss
 
-1: .grid {
-2:   box-sizing: border-box;
-3:   padding: 0 .5rem;
-4: 
-5:   @include variant(container) {
-6:     margin: 0 auto;
-7:     max-width: 1200px;
-8:     width: 100%;
-9:   }
 10: 
+11:   &:last-child {
+12:     margin-bottom: 0;
+13:   }
+14: 
+15:   @include variant(no-gutters) {
+16:     margin: 0;
+17:   }
+18: }
 
 Backtrace:
-/home/ubuntu/workspace/WMSSearch/src/styles/layout/_grid.scss:5:in `variant'
-/home/ubuntu/workspace/WMSSearch/src/styles/layout/_grid.scss:5
+/home/ubuntu/workspace/WMSSearch/src/styles/layout/_row.scss:15:in `variant'
+/home/ubuntu/workspace/WMSSearch/src/styles/layout/_row.scss:15
 /nix/store/zmisxnl63ica4zaviifixamr3xg27kzp-ruby-2.3.1-p0/lib/ruby/gems/2.3.0/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:351:in `block in visit_mixin'
 /nix/store/zmisxnl63ica4zaviifixamr3xg27kzp-ruby-2.3.1-p0/lib/ruby/gems/2.3.0/gems/sass-3.4.23/lib/sass/stack.rb:98:in `block in with_mixin'
 /nix/store/zmisxnl63ica4zaviifixamr3xg27kzp-ruby-2.3.1-p0/lib/ruby/gems/2.3.0/gems/sass-3.4.23/lib/sass/stack.rb:115:in `with_frame'
@@ -68,4 +67,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined mixin 'variant'.\A         on line 5 of /home/ubuntu/workspace/WMSSearch/src/styles/layout/_grid.scss, in `variant'\A         from line 5 of /home/ubuntu/workspace/WMSSearch/src/styles/layout/_grid.scss\A \A 1: .grid {\A 2:   box-sizing: border-box;\A 3:   padding: 0 .5rem;\A 4: \A 5:   @include variant(container) {\A 6:     margin: 0 auto;\A 7:     max-width: 1200px;\A 8:     width: 100%;\A 9:   }\A 10: "; }
+  content: "Error: Undefined mixin 'variant'.\A         on line 15 of /home/ubuntu/workspace/WMSSearch/src/styles/layout/_row.scss, in `variant'\A         from line 15 of /home/ubuntu/workspace/WMSSearch/src/styles/layout/_row.scss\A \A 10: \A 11:   &:last-child {\A 12:     margin-bottom: 0;\A 13:   }\A 14: \A 15:   @include variant(no-gutters) {\A 16:     margin: 0;\A 17:   }\A 18: }"; }

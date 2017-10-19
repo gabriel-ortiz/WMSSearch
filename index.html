@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>WMS Searchbox</title>
     <link rel="stylesheet" href="dist/styles/style.css" type="text/css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>    
     <script type="text/javascript" src="dist/scripts/main.js"></script>
 </head>
 <body>
@@ -21,190 +22,28 @@
 <div class="idk" style="height:200px;">
     dummy text
 </div>
-
-<!--
-<div class="wms-l-container">
+   
+    <script type="text/javascript">
     
-    <div id="wms-search-for" class="columns wms-row">
-        <div class="column is-2">
-            <h2 class="wms-c-title">Search for:</h2>
-        </div>
-        <div class="column is-10">
-            <input id="wms-c-keyword" class="wms-search" type="text" name="keyword" placeholder="Start typing your search"/>    
-        </div>
-    </div>
-    
-    <div id="wms-search-options" class="columns wms-row">
-        
-        <div class="column is-3 wms-dropdown wms-search">
-            <div class="wms-c-selected">
-                <span class="wms-prompt">AS: </span>
-                <span class="wms-selected-item" data-search_attr="selected">I am selected text</span>                
-            </div>
-            
-            <div class="wms-items">
-                <ul class="wms-list-options">
-                    <li  class="wms-select_attr"><a href="#">Brazil</a></li>
-                    <li  class="wms-select_attr"><a href="#">France</a></li>
-                    <li  class="wms-select_attr"><a href="#">Germany</a></li>
-                    <li  class="wms-select_attr"><a href="#">India</a></li>
-                    <li  class="wms-select_attr"><a href="#">Japan</a></li>
-                    <li  class="wms-select_attr"><a href="#">Serbia</a></li>
-                    <li  class="wms-select_attr"><a href="#">United Kingdom</a></li>
-                    <li  class="wms-select_attr"><a href="#">United States</a></li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="column is-3 wms-dropdown wms-search">
-            <div class="wms-c-selected">
-                <span class="wms-prompt">IN:</span>
-                <span class="wms-selected-item" data-search_attr="selected">I am selected text</span>                
-            </div>
-            
-            <div class="wms-items">
-                <ul class="wms-list-options">
-                    <li  class="wms-select_coll"><a href="#">Brazil</a></li>
-                    <li  class="wms-select_coll"><a href="#">France</a></li>
-                    <li  class="wms-select_coll"><a href="#">Germany</a></li>
-                    <li  class="wms-select_coll"><a href="#">India</a></li>
-                    <li  class="wms-select_coll"><a href="#">Japan</a></li>
-                    <li  class="wms-select_coll"><a href="#">Serbia</a></li>
-                    <li  class="wms-select_coll"><a href="#">United Kingdom</a></li>
-                    <li  class="wms-select_coll"><a href="#">United States</a></li>
-                </ul>
-            </div>
-        </div>        
-        
-        
-        <div class="column is-3 wms-dropdown wms-search">
-            <div class="wms-c-selected">
-                <span  class="wms-prompt">FOR:</span>
-                <span class="wms-selected-item">I am selected text</span>                
-            </div>
-            
-            <div class="wms-items">
-                <ul class="wms-list-options">
-                    <li  class="wms-select_format"><a href="#">Brazil</a></li>
-                    <li  class="wms-select_format"><a href="#">France</a></li>
-                    <li  class="wms-select_format"><a href="#">Germany</a></li>
-                    <li  class="wms-select_format"><a href="#">India</a></li>
-                    <li  class="wms-select_format"><a href="#">Japan</a></li>
-                    <li  class="wms-select_format"><a href="#">Serbia</a></li>
-                    <li  class="wms-select_format"><a href="#">United Kingdom</a></li>
-                    <li  class="wms-select_format"><a href="#">United States</a></li>
-                </ul>
-            </div>
-        </div>        
-        
-        <div id="wms-search-button" class="column is-3">
-          <button  id="wms-submit" class="wms-button wms-search" type="submit">Search</button>           
-        </div>
- 
-        
-    </div>
+(function(window, $){
 
-</div>
+    $(document).ready(function(){
+        //console.log('this has been loaded');
+       $('.loadWMS').WMSSearch({
+            scoped_search_settings: {
+                scoped_searchbox : true,
+                scoped_search_title: 'African History',
+                scoped_search_desc: 'This search box targets will search within information about African History',
+                scoped_search_scoping: 'su:American Studies OR su:American history',
+                scoped_search_location  : ''
+            }
+
+       }); 
+    });        
+
+})(this, jQuery);
 
 
-<div class="wms-l-container">
-    
-    <div id="wms-search-for" class="wms-l-row">
-        <div class="wms-l-column wms-l-span-2-md">
-            <h2 class="wms-c-title">Search for:</h2>
-        </div>
-        <div class="wms-l-column wms-l-span-10-md">
-            <input id="wms-c-keyword" class="wms-search" type="text" name="keyword" placeholder="Start typing your search"/>    
-        </div>
-    </div>
-    
-    <div class="wms-l-row">
-        
-        <div class="wms-l-column wms-l-span-3-md wms-dropdown wms-search">
-            <div class="wms-c-selected">
-                <span class="wms-prompt">AS: </span>
-                <span class="wms-selected-item" data-search_attr="selected">I am selected text</span>                
-            </div>
-            
-            <div class="wms-items">
-                <ul class="wms-list-options">
-                    <li  class="wms-select_attr"><a href="#">Brazil</a></li>
-                    <li  class="wms-select_attr"><a href="#">France</a></li>
-                    <li  class="wms-select_attr"><a href="#">Germany</a></li>
-                    <li  class="wms-select_attr"><a href="#">India</a></li>
-                    <li  class="wms-select_attr"><a href="#">Japan</a></li>
-                    <li  class="wms-select_attr"><a href="#">Serbia</a></li>
-                    <li  class="wms-select_attr"><a href="#">United Kingdom</a></li>
-                    <li  class="wms-select_attr"><a href="#">United States</a></li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="wms-l-column wms-l-span-3-md wms-dropdown wms-search">
-            <div class="wms-c-selected">
-                <span class="wms-prompt">IN:</span>
-                <span class="wms-selected-item" data-search_attr="selected">I am selected text</span>                
-            </div>
-            
-            <div class="wms-items">
-                <ul class="wms-list-options">
-                    <li  class="wms-select_coll"><a href="#">Brazil</a></li>
-                    <li  class="wms-select_coll"><a href="#">France</a></li>
-                    <li  class="wms-select_coll"><a href="#">Germany</a></li>
-                    <li  class="wms-select_coll"><a href="#">India</a></li>
-                    <li  class="wms-select_coll"><a href="#">Japan</a></li>
-                    <li  class="wms-select_coll"><a href="#">Serbia</a></li>
-                    <li  class="wms-select_coll"><a href="#">United Kingdom</a></li>
-                    <li  class="wms-select_coll"><a href="#">United States</a></li>
-                </ul>
-            </div>
-        </div>        
-        
-        
-        <div class="wms-l-column wms-l-span-3-md wms-dropdown wms-search">
-            <div class="wms-c-selected">
-                <span  class="wms-prompt">FOR:</span>
-                <span class="wms-selected-item">I am selected text</span>                
-            </div>
-            
-            <div class="wms-items">
-                <ul class="wms-list-options">
-                    <li  class="wms-select_format"><a href="#">Brazil</a></li>
-                    <li  class="wms-select_format"><a href="#">France</a></li>
-                    <li  class="wms-select_format"><a href="#">Germany</a></li>
-                    <li  class="wms-select_format"><a href="#">India</a></li>
-                    <li  class="wms-select_format"><a href="#">Japan</a></li>
-                    <li  class="wms-select_format"><a href="#">Serbia</a></li>
-                    <li  class="wms-select_format"><a href="#">United Kingdom</a></li>
-                    <li  class="wms-select_format"><a href="#">United States</a></li>
-                </ul>
-            </div>
-        </div>        
-        
-        
-        <button  id="wms-submit" class="wms-l-column wms-l-span-3-md wms-button wms-search" type="submit">Search</button>  
-        
-    </div>
-
-</div>
--->    
-    <script>
-        $(document).ready(function(){
-           $('.loadWMS').WMSSearch({
-               
-           }); 
-        });
-        
-        $(".wms-dropdown").click(function() {
-            console.log('this has been clicked');
-            $(this).find('.wms-list-options').slideToggle('fast');
-        });
-        
-        $('.wms-select_attr').on('click', function(){
-            var test = $(this).text();
-            console.log(test);
-            $('.wms-selected-item').html(test);
-        });
     </script>
 </body>
 </html>

@@ -1,22 +1,25 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway:300i,400,400i,500,800');
+// Grid breakpoints
+$breakpoints: (
+        xs : 0,
+        sm : 544px,
+        md : 768px,
+        lg : 992px,
+        xl : 1200px
+) !default;
 
-html{
-    font-family: 'Raleway', sans-serif !important;
-      overflow-y: scroll;
-}
+// Number of columns
+$columns: 12 !default;
 
-//color variables
-$main-color-box: #efefef;
-$main-hover-color: #ccc;
+//colors
+$midnight-gray:        #333f48;
+$eighty-midnight:      #616b78;
+$sixty-midnight:        #8b929d;
+$forty-midnight:        #bdc1c7;
+$super-light:         #e6e9ee;
+$white:                 white;
+$call-to-action:        #239acb;
 
 
-//breakpoints:
-$mobile-width: 480px;
-$tablet-width: 768px;
-$desktop-width: 1024px;
-
-//gutter
-$gutter: 18px;
-
-//columns
-$columns : 12;
+$main-color-box: $forty-midnight;
+$main-hover-color: $sixty-midnight;
+$light-hover: lighten($forty-midnight, 5%);
