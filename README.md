@@ -15,22 +15,25 @@ This plugin is a fully customizable searchbox generator that allows WMS users to
 Download or clone this project to your project directory, add `README.md`, and commit:
 
 ```sh
-git clone {insert url here}
+git clone https://github.com/gabrielo-cuc/WMSSearch.git
 git add README.md
 git commit -m "Initial commit"
 ```
 
 ## Customization:
+
 - Framework: This plugin contains a fully customizable Flexbox grid framework provided by [Vivid-WebSolutions, Peter van Meijgaard ](https://flexboxgrid.vivid-websolutions.nl/), MIT Lisence. Note the source files for this are SASS. But the compiled CSS is included in the `dist/styles.style.css` folder.  This is exclusively a grid, and contains no other styling (other than the searchbox styling of course).  
 - Styling: Searchbox styling is located in `src/styles/components/_searchbox.scss`, or you can style the compliled CSS file.
+- Colors and variables are located in `src/styles/base/_variables.scss`.
 - Elements: There is no native HTML in this plugin, to make changes to any elements rendered, do so in the main.js document. 
 
 ## Usage
 
 ##Setup
+
 - Required defaults (without this, nothing works)
-..* At the bare minimum, the plugin needs the base URL of your WMS site, ie. https://{xyz}.on.worldcat.org/search? (xyz is your institution ID)
-..* You also need the collections set: Each WMS collection contains a scope id for the main collection, ie. "wz:519", and a subscope for collections within the main collection, ie. "wz:519::zs:36307" You can find this in the URL as: "scope&subscope=wz%3A519%3A%3Azs%3A36307". For each collection, add a line to the collections array like so:
+- At the bare minimum, the plugin needs the base URL of your WMS site, ie. *https://{xyz}.on.worldcat.org/search?* (xyz is your institution ID)
+- You also need the collections set: Each WMS collection contains a scope id for the main collection, ie. "wz:519", and a subscope for collections within the main collection, ie. "wz:519::zs:36307" You can find this in the URL as: "scope&subscope=wz%3A519%3A%3Azs%3A36307". For each collection, add a line to the collections array like so:
 ```javascript
     collections         : [
         {id: 'all', name: 'General Collections', paramater: 'wz:519', order:'primary'},
@@ -40,8 +43,11 @@ git commit -m "Initial commit"
 *Set the primary collection with this:* `order:'primary'`
 
 ##Scoped Search setup
+
 - Scoped search is used to create a single search box that is scoped to specific paramaters. The users input will be prepended with the scoped search query in WMS.
-..*  To turn on the scoped search box, set scoped_searchbox to `true` 
+- To turn on the scoped search box, set scoped_searchbox to `true` 
+- Enter a scoped search query to the in the `scoped_search_collection` option. For example: `scoped_search_collection: 'su:wordpress'`
+- Want to know more about how to use search indices in WMS? [See all available attributes and property types](http://www.oclc.org/support/help/SearchingWorldCatIndexes/)
 
 ##Plugin Options
 
@@ -113,10 +119,10 @@ $.fn.WMSSearch.options = {
         ]            
     },
     scoped_search_settings      : {
-        scoped_searchbox        : false,
-        scoped_search_title     : '',
-        scoped_search_desc      : '',
-        scoped_search_scoping   : '',
+        scoped_searchbox        : true,
+        scoped_search_title     : 'WordPress',
+        scoped_search_desc      : 'All things Wordpress',
+        scoped_search_scoping   : 'su:wordpress',
         scoped_search_collection  : '',
         scoped_search_format    : 'all',
         scoped_search_boolean   : 'AND'
@@ -140,7 +146,8 @@ $.fn.WMSSearch.options = {
 };
 ```
 
-##Call the plugin
+## Call the plugin
+
 - Calling the plugin is super easy to do in your code editor
 ```javascript
 <script type="text/javascript">
@@ -161,8 +168,5 @@ $.fn.WMSSearch.options = {
 ```
 ## Support
 
-Please [open an issue](https://github.com/fraction/readme-boilerplate/issues/new) for support.
+Please [open an issue](https://github.com/gabrielo-cuc/WMSSearch/issues) for support.
 
-## Contributing
-
-Please contribute using [Github Flow](https://guides.github.com/introduction/flow/). Create a branch, add commits, and [open a pull request](https://github.com/fraction/readme-boilerplate/compare/).

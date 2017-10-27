@@ -3,7 +3,7 @@ Error: Undefined variable: "$forty-midnight".
         on line 25 of /home/ubuntu/workspace/WMSSearch/src/styles/components/_searchbox.scss
 
 20: .wms-c-keyword{
-21:     padding: 0 .5em;
+21:     padding: .5em;
 22:     box-sizing: border-box;
 23:     
 24:         &:focus{
@@ -80,4 +80,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$forty-midnight\".\A         on line 25 of /home/ubuntu/workspace/WMSSearch/src/styles/components/_searchbox.scss\A \A 20: .wms-c-keyword{\A 21:     padding: 0 .5em;\A 22:     box-sizing: border-box;\A 23:     \A 24:         &:focus{\A 25:             box-shadow: inset 0px 0px 2px $forty-midnight;\A 26:             \A 27:         }\A 28: \A 29:     }\A 30:     "; }
+  content: "Error: Undefined variable: \"$forty-midnight\".\A         on line 25 of /home/ubuntu/workspace/WMSSearch/src/styles/components/_searchbox.scss\A \A 20: .wms-c-keyword{\A 21:     padding: .5em;\A 22:     box-sizing: border-box;\A 23:     \A 24:         &:focus{\A 25:             box-shadow: inset 0px 0px 2px $forty-midnight;\A 26:             \A 27:         }\A 28: \A 29:     }\A 30:     "; }

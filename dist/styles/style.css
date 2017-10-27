@@ -87,7 +87,7 @@ button {
 }
 
 .wms-c-keyword {
-  padding: 0 .5em;
+  padding: .5em;
   box-sizing: border-box;
 }
 .wms-c-keyword:focus {
