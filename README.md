@@ -59,7 +59,7 @@ $.fn.WMSSearch.options = {
         scoped_search_title     : [string, optional] This is the title of your scoped searchbox
         scoped_search_desc      : [string, optional] Description that adds additional contextual information to the scoped searchbox
         scoped_search_scoping   : [string, search paramater, REQUIRED] !important - this is the paramater that will prepend the user's     search 
-        scoped_search_location  : [string, search paramater] ID location of the collection you are targeting
+        scoped_search_collection  : [string, search paramater] ID location of the collection you are targeting
         scoped_search_format    : [string, search paramater] Attribute type for searching. ie. keyword, title, author, etc. the             resulting search query will be prepended with that attribute search type.
         scoped_search_boolean   : [string, search paramater] Standard boolean (AND, NOT, OR)
     },
@@ -108,7 +108,8 @@ $.fn.WMSSearch.options = {
         databaseList        : '',
         collections         : [
             {id: 'all', name: 'General Collections', paramater: 'wz:519', order:'primary'},
-            {id: 'spcl', name: 'Special Collections', paramater: 'wz:519::zs:36307'}            
+            {id: 'spcl', name: 'Special Collections', paramater: 'wz:519::zs:36307'},
+            {id: 'oclc', name: 'Libraries Worldwide', paramater: '&scope=wz:519'} //required             
         ]            
     },
     scoped_search_settings      : {
@@ -116,7 +117,7 @@ $.fn.WMSSearch.options = {
         scoped_search_title     : '',
         scoped_search_desc      : '',
         scoped_search_scoping   : '',
-        scoped_search_location  : '',
+        scoped_search_collection  : '',
         scoped_search_format    : 'all',
         scoped_search_boolean   : 'AND'
     },

@@ -160,33 +160,51 @@
             //declare variables
             //  {id: 'kw', name: 'Keyword', paramater: 'kw'},
             var html_select_list = [];
-            var temp_li;
+            var temp_label, temp_input, primary_field;
             
             
-            //get selected updayed_select_list
-            //if there is no primary set - then return the first item in options array
-            var selected_primary_field = updated_select_list.filter(function(obj){
-                if( obj.order == 'primary' ){
-                    return  obj.order == 'primary';
-                }else{
-                    return updated_select_list[0];
-                }
+            for ( var obj in updated_select_list){
 
-            });
+                if( updated_select_list[obj].hasOwnProperty('order') ){
+                    primary_field = updated_select_list[obj];
+                    break;
+                }else {
+                    primary_field = updated_select_list[0];   
+                }
+            }
+            
+            
+            console.log(primary_field);
             
             //construct an array of options as an array
             $.each(updated_select_list, function(index, value){
-               temp_li = $('<li />')
+                
+                temp_input =    $('<input />')
+                                    .attr({
+                                        'type'  : 'radio',
+                                        'id'    : value.paramater,
+                                        'name'  : search_prefix,
+                                    })
+                                    .val(value.paramater);
+                                    
+                if( value.hasOwnProperty('order') ){
+                    temp_input.attr('checked', 'checked');
+                }else if( index == 0 ){
+                    temp_input.attr('checked', 'checked');
+                }
+        
+               temp_label = $('<label />')
                             .attr({
                                 'class'         : 'wms-select_attr',
-                                'data-wms_attr' : value.paramater,
                                 'role'          : 'menuitem',
                                 'tabindex'      : '0',
-                                'aria-hidden'   : 'true'
+                                'aria-hidden'   : 'true',
+                                'for'           : value.paramater
                             })
-                            .text(value.name);
-            
-                html_select_list.push( temp_li );
+                            .text(value.name)
+                            .append(temp_input);
+
+                html_select_list.push( temp_label );
                 
             });
             
@@ -216,11 +234,11 @@
                                                     $('<span />')
                                                         .addClass( 'wms-selected-item type-'+search_prefix )
                                                         .attr({
-                                                            'data-wms_attr' : selected_primary_field[0].paramater,
+                                                            'data-wms_attr' : primary_field.paramater,
                                                             'data-wms_type' : search_prefix
                                                             
                                                         })
-                                                        .text( selected_primary_field[0].name )
+                                                        .text( primary_field.name )
                                                     )
                                                 .append(
                                                     $('<span />')
@@ -229,18 +247,13 @@
                                                     )  
                                             );
             //div.wms-items
-            var wms_attr_dropdown_items = $('<div />')
-                                                .addClass('wms-items')
-                                                .append(
-                                                    //ul.wms-list-options
-                                                    $('<ul />').addClass('wms-list-options')
-                                                        .attr({
-                                                            'role'          : 'menu',
-                                                            'aria-haspopup' : 'true'
-                                                        })
-                                                        //this will list out the options to be selected
-                                                        .append(html_select_list)
-                                                    );            
+            var wms_attr_dropdown_items = $('<div />').addClass('wms-list-options')
+                                                .attr({
+                                                    'role'          : 'menu',
+                                                    'aria-haspopup' : 'true'
+                                                })
+                                                //this will list out the options to be selected
+                                                .append(html_select_list);
             
             //return appended object to column
             //append dropdown items to div.wms-l-column wms-l-span-3-md wms-dropdown wms-search
@@ -281,13 +294,13 @@
 
                 search_string = input_array['attr'];
                 
-                source_location = plugin.options.scoped_search_settings.scoped_search_location;
+                source_location = plugin.options.scoped_search_settings.scoped_search_collection;
                 
             }else if ( plugin.options.scoped_search_settings.scoped_searchbox === true){
                 
                 search_string = "(" + plugin.options.scoped_search_settings.scoped_search_scoping +") " + plugin.options.scoped_search_settings.scoped_search_boolean +" "+ input_array['attr'];
                 
-                source_location = plugin.options.scoped_search_settings.scoped_search_location;
+                source_location = plugin.options.scoped_search_settings.scoped_search_collection;
             }else{
                 
                 search_string = input_array['attr'];
@@ -381,31 +394,47 @@
             $element
                 //show dropdown
                 .on('keypress click', '.wms-dropdown' , function(event){
+                    
                     if(event.keyCode == 13 || event.type == 'click'){
                         var $this = $( this );
+                        //console.log( $this );
                         var selected_option = $this.find('.wms-list-options');
                         var toggle_arrow = $this.find('.wms-arrow__toggle');
                         toggle_arrow.toggleClass('toggle-up');
                         $('.wms-arrow__toggle').not(toggle_arrow).removeClass('toggle-up');
                         
                         selected_option.slideToggle('fast');
-                        $('.wms-list-options').not(selected_option).slideUp('fast');                     
+                        $('.wms-list-options').not(selected_option).slideUp('fast');
+                        //console.log('first event fired');
+                        
                     }
+                    
+
 
                 })
                 //select the item from the options list and set as data in the selected item
-                .on('click keypress', 'li.wms-select_attr', function(event){
+                .on('click keypress', 'label.wms-select_attr', function(event){
                     if(event.keyCode == 13 || event.type == 'click'){
+
                         //create variables of selected item
-                        var selected_attr = $( event.target );
-                        var selected_attr_data = selected_attr.attr('data-wms_attr');
-                        var selected_attr_text = selected_attr.text();
-                        //update the default with selected item
-                        selected_attr
-                            .parents('.wms-search')
-                            .find('.wms-selected-item')
-                            .text( selected_attr_text )
-                            .attr('data-wms_attr', selected_attr_data );
+                        if(event.target.tagName == 'LABEL'){
+
+                            var $this = $(this);
+                            var selected_attr_name = $this.text();
+                            var selected_attr_data = $this.find("input").val();
+                                
+                            //console.log( selected_attr_data );
+                            //update the default with selected item
+                            $this
+                                .parents('.wms-search')
+                                .find('.wms-selected-item')
+                                .text( selected_attr_name );
+                        
+                            //stop label from triggering the slidetoggle from opening again
+                            event.stopPropagation();
+                        }
+                        
+
                     }
 
                     
@@ -416,8 +445,9 @@
                     //grab all elements
 
                     var selected_search_elements = '';
-                    selected_search_elements = $('.wms-selected-item');
-                    //console.log('new data', selected_search_elements);
+                    selected_search_elements = $('.wms-list-options');
+                    //console.log('new data', selected_search_elements.find('input[name="attr"]:checked') );
+                    
                     //grab search input
                     var search_input = $('input[name="keyword"]').val();
 
@@ -425,26 +455,30 @@
                     var scoped_search = [];
                     
                     if( plugin.options.scoped_search_settings.scoped_searchbox === true ){
-                        scoped_search['attr']   = selected_search_elements.attr('data-wms_attr') + ':' + search_input;
+                        scoped_search['attr']   = selected_search_elements.find('input[name="attr"]:checked').attr('value') + ':' + search_input;
                         scoped_search['frmt']   = plugin.options.scoped_search_settingsscoped_search_format || 'all';
                         scoped_search['src']    = plugin.options.scoped_search_settings.scoped_search_scoping || '';
                     }
                     
                     $.each(selected_search_elements, function(index, value){
-                        if( $(value).attr('data-wms_type') == 'attr'){
+
+                        var temp_radio = $(value).find('input[type="radio"]:checked');
+
+                        if( temp_radio.attr('name') == 'attr'){
                             scoped_search['attr'] = '';
-                            scoped_search['attr'] = $(value).attr('data-wms_attr')+ ':' + search_input;
+                            scoped_search['attr'] = temp_radio.val()+ ':' + search_input;
                             
-                        }else if(  $(value).data('wms_type') == 'frmt' ){
+                        }else if(  temp_radio.attr('name') == 'frmt' ){
                             scoped_search['frmt'] = '';                            
-                            scoped_search['frmt'] = $(value).attr('data-wms_attr');
+                            scoped_search['frmt'] = temp_radio.val();
                             
-                        }else if( $(value).data('wms_type') == 'src' ){
+                        }else if( temp_radio.attr('name') == 'src' ){
                             scoped_search['src'] = '';                            
-                            scoped_search['src'] = $(value).attr('data-wms_attr');
+                            scoped_search['src'] = temp_radio.val();
                         }
                         
                     });
+                    
                     
                    var  wms_url = construct_url(scoped_search);
                    console.log(wms_url);
@@ -482,12 +516,13 @@
     
     $.fn.WMSSearch.options = {
         defaults                :{
-            wms_base_url        : 'https://ccl.on.worldcat.org/search?',
-            sortKey             : 'LIBRARY',
+            wms_base_url        : 'https://ccl.on.worldcat.org/search?', //required
+            sortKey             : 'LIBRARY', //required
             databaseList        : '',
             collections         : [
-                {id: 'all', name: 'General Collections', paramater: 'wz:519', order:'primary'},
-                {id: 'spcl', name: 'Special Collections', paramater: 'wz:519::zs:36307'}            
+                {id: 'all', name: 'General Collections', paramater: 'wz:519', order:'primary'}, //required
+                {id: 'spcl', name: 'Special Collections', paramater: 'wz:519::zs:36307'},
+                {id: 'oclc', name: 'Libraries Worldwide', paramater: '&scope=wz:519'} //required 
             ]            
         },
         scoped_search_settings      : {
@@ -495,7 +530,7 @@
             scoped_search_title     : '',
             scoped_search_desc      : '',
             scoped_search_scoping   : '',
-            scoped_search_location  : '',
+            scoped_search_collection  : '',
             scoped_search_format    : 'all',
             scoped_search_boolean   : 'AND'
         },
@@ -510,7 +545,6 @@
     
             omit_attributes     : ['n2'],
             omit_formats        : ['music'],
-            omit_collections    : [],
             searchbox_help      : 'Enter a keyword into the search box to get started',
             search_attr_help    : 'What are you searching as? Attributes help you narrow your search',
             search_source_attr  : 'Where would you like to search. Here are different collections materials to narrow your search'

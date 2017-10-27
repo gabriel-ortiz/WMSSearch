@@ -145,12 +145,6 @@ button {
   box-sizing: border-box;
   height: 100%;
 }
-.wms-dropdown .wms-items {
-  position: relative;
-  width: 100%;
-  margin: 0;
-  box-sizing: border-box;
-}
 .wms-dropdown .wms-prompt {
   display: inline-block;
   text-decoration: none;
@@ -164,7 +158,7 @@ button {
   display: block;
   padding: 5px;
 }
-.wms-dropdown .wms-items .wms-list-options {
+.wms-dropdown .wms-list-options {
   background: #e6e9ee;
   display: none;
   list-style: none;
@@ -175,8 +169,16 @@ button {
   box-sizing: border-box;
   z-index: 100;
   box-shadow: 0px 7px 7px -6px black;
+  top: 100%;
 }
-.wms-dropdown .wms-items .wms-list-options li:hover, .wms-dropdown .wms-items .wms-list-options li:focus {
+.wms-dropdown .wms-list-options label {
+  display: block;
+  cursor: pointer;
+}
+.wms-dropdown .wms-list-options label > input {
+  display: none;
+}
+.wms-dropdown .wms-list-options li:hover, .wms-dropdown .wms-list-options li:focus {
   color: #239acb;
 }
 .wms-dropdown span.value {

@@ -53,6 +53,8 @@ button{
     }
     
     
+    
+    
     .wms-c-selected {
         flex-grow: 1;
         flex-shrink: 1;
@@ -76,13 +78,13 @@ button{
         height: 100%;                   
     }    
     
-    //sample items
-    .wms-items{
-        position: relative;
-        width: 100%;
-        margin: 0;
-        box-sizing: border-box;
-    }
+    // //sample items
+    // .wms-items{
+    //     position: relative;
+    //     width: 100%;
+    //     margin: 0;
+    //     box-sizing: border-box;
+    // }
     
 
     /* DT styles for sliding doors */    
@@ -105,7 +107,7 @@ button{
     }
     
     /* UL styles */    
-    .wms-items .wms-list-options{
+    .wms-list-options{
         background: $super-light; 
         display:none;
         list-style:none; 
@@ -115,7 +117,21 @@ button{
         padding: 1em;
         box-sizing: border-box;
         z-index: 100;
-        box-shadow: 0px 7px 7px -6px black;        
+        box-shadow: 0px 7px 7px -6px black;
+        top: 100%;
+        
+        //make label display block
+        label {
+            display: block;
+            cursor: pointer;
+            
+            //select all inputs as children of label and set to none
+            & > input {
+                display: none;
+            }            
+        }
+        
+
         
         li{
             &:hover,
