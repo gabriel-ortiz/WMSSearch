@@ -27,7 +27,7 @@ git commit -m "Initial commit"
 
 ## Usage
 
-###Setup
+##Setup
 - Required defaults (without this, nothing works)
 ..* At the bare minimum, the plugin needs the base URL of your WMS site, ie. https://{xyz}.on.worldcat.org/search? (xyz is your institution ID)
 ..* You also need the collections set: Each WMS collection contains a scope id for the main collection, ie. "wz:519", and a subscope for collections within the main collection, ie. "wz:519::zs:36307" You can find this in the URL as: "scope&subscope=wz%3A519%3A%3Azs%3A36307". For each collection, add a line to the collections array like so:
@@ -39,11 +39,11 @@ git commit -m "Initial commit"
 ```
 *Set the primary collection with this:* `order:'primary'`
 
-###Scoped Search setup
+##Scoped Search setup
 - Scoped search is used to create a single search box that is scoped to specific paramaters. The users input will be prepended with the scoped search query in WMS.
 ..*  To turn on the scoped search box, set scoped_searchbox to `true` 
 
-###Plugin Options
+##Plugin Options
 
 **Plugin Options descriptions**
 ```
@@ -140,7 +140,7 @@ $.fn.WMSSearch.options = {
 };
 ```
 
-###Call the plugin
+##Call the plugin
 - Calling the plugin is super easy to do in your code editor
 ```javascript
 <script type="text/javascript">

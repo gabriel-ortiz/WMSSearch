@@ -415,7 +415,8 @@
 
                             var $this = $(this);
                             var selected_attr_name = $this.text();
-                            var selected_attr_data = $this.find("input").val();
+                            var selected_attr_data = $this.find("input");
+                            
                                 
                             //console.log( selected_attr_data );
                             //update the default with selected item
@@ -426,9 +427,9 @@
                         
                             //stop label from triggering the slidetoggle from opening again
                             event.stopPropagation();
+                            
+                            selected_attr_data.attr('checked', 'checked');
                         }
-                        
-
                     }
 
                     
