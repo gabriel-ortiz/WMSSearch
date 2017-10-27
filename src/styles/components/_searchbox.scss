@@ -19,9 +19,11 @@ button{
 
 .wms-c-keyword{
     padding: 0 .5em;
+    box-sizing: border-box;
     
         &:focus{
-            box-shadow: inset 0px 0px 1px $light-hover;
+            box-shadow: inset 0px 0px 2px $forty-midnight;
+            
         }
 
     }
@@ -49,7 +51,7 @@ button{
     
     &:hover,
     &:focus{
-        background-color: $light-hover;
+        background-color: $forty-midnight;
     }
     
     
@@ -70,7 +72,7 @@ button{
         display: inline-block;
         transform: rotate(90deg);
         margin-left: auto;
-        transition: all 0.2s ease;
+        transition: $main-transition;
         transform-origin: center;
         transform-style: preserve-3D;    
         padding: 0 .5em 0 .3em;
@@ -121,24 +123,28 @@ button{
         top: 100%;
         
         //make label display block
-        label {
+        label.wms-select_attr {
             display: block;
             cursor: pointer;
+            padding: .2em;
+            box-sizing: border-box;
+            transition: $main-transition;
             
             //select all inputs as children of label and set to none
-            & > input {
+            & > input[type=radio] {
                 display: none;
-            }            
-        }
-        
-
-        
-        li{
+            }  
+            
             &:hover,
             &:focus{
                 color: $call-to-action;
+                background: $light-hover;
             }
+            
+            
         }
+        
+
     }
     
     span.value{

@@ -141,8 +141,6 @@
                     {id: 'music', name: 'Musical Scores', paramater: 'Msscr'}
                 ];
 
-                
-        
         /**
          * Generate search field with code with list options
          * 
@@ -172,9 +170,6 @@
                     primary_field = updated_select_list[0];   
                 }
             }
-            
-            
-            console.log(primary_field);
             
             //construct an array of options as an array
             $.each(updated_select_list, function(index, value){
@@ -349,7 +344,6 @@
                 wms_params[source_key] = source_location;
                 wms_params[format_key] = format_value;
                 
-                
                //so here we've got to replace encoded ampersands
                 var clean_plugin = plugin.options.defaults.wms_base_url + $.param(wms_params);
                 clean_plugin    = clean_plugin.replace('%26', "&");
@@ -482,6 +476,7 @@
                     
                    var  wms_url = construct_url(scoped_search);
                    console.log(wms_url);
+                   window.open(wms_url, '_blank');
                    
                     //clear the variables
                     scoped_search = [];

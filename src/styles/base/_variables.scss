@@ -26,4 +26,7 @@ $call-to-action:        #239acb;
 
 $main-color-box: $forty-midnight;
 $main-hover-color: $sixty-midnight;
-$light-hover: lighten($forty-midnight, 5%);
+$light-hover: lighten($forty-midnight, 50%);
+
+//transitions:
+$main-transition: all 0.2s ease;

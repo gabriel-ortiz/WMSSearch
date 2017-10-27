@@ -88,9 +88,10 @@ button {
 
 .wms-c-keyword {
   padding: 0 .5em;
+  box-sizing: border-box;
 }
 .wms-c-keyword:focus {
-  box-shadow: inset 0px 0px 1px #cbced3;
+  box-shadow: inset 0px 0px 2px #bdc1c7;
 }
 
 .wms-search {
@@ -119,7 +120,7 @@ button {
   /* UL styles */
 }
 .wms-dropdown:hover, .wms-dropdown:focus {
-  background-color: #cbced3;
+  background-color: #bdc1c7;
 }
 .wms-dropdown .wms-c-selected {
   -ms-flex-positive: 1;
@@ -171,15 +172,19 @@ button {
   box-shadow: 0px 7px 7px -6px black;
   top: 100%;
 }
-.wms-dropdown .wms-list-options label {
+.wms-dropdown .wms-list-options label.wms-select_attr {
   display: block;
   cursor: pointer;
+  padding: .2em;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
 }
-.wms-dropdown .wms-list-options label > input {
+.wms-dropdown .wms-list-options label.wms-select_attr > input[type=radio] {
   display: none;
 }
-.wms-dropdown .wms-list-options li:hover, .wms-dropdown .wms-list-options li:focus {
+.wms-dropdown .wms-list-options label.wms-select_attr:hover, .wms-dropdown .wms-list-options label.wms-select_attr:focus {
   color: #239acb;
+  background: white;
 }
 .wms-dropdown span.value {
   display: none;
