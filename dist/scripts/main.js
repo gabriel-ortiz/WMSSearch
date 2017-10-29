@@ -114,16 +114,16 @@
              * WMS Search Attributes
              */
             var default_search_attrs = [
-                    {id: 'kw', name: 'Keyword', paramater: 'kw', order:'primary'},
-                    {id: 'ti', name: 'Title', paramater: 'ti'},
-                    {id: 'au', name: 'Author', paramater: 'au'},
-                    {id: 'bn', name: 'ISBN', paramater: 'bn'},
-                    {id: 'su', name: 'Subject', paramater: 'su'},
-                    {id: 'no', name: 'OCLC Number', paramater: 'no'},
-                    {id: 'so', name: 'Journal Source', paramater: 'so'},
-                    {id: 'yr', name: 'Year', paramater: 'yr'},
-                    {id: 'n2', name: 'ISSN', paramater: 'n2'},
-                    {id: 'nu', name: 'Call Number', paramater: 'nu'}                     
+                    {id: 'kw', name: 'Keyword', parameter: 'kw', order:'primary'},
+                    {id: 'ti', name: 'Title', parameter: 'ti'},
+                    {id: 'au', name: 'Author', parameter: 'au'},
+                    {id: 'bn', name: 'ISBN', parameter: 'bn'},
+                    {id: 'su', name: 'Subject', parameter: 'su'},
+                    {id: 'no', name: 'OCLC Number', parameter: 'no'},
+                    {id: 'so', name: 'Journal Source', parameter: 'so'},
+                    {id: 'yr', name: 'Year', parameter: 'yr'},
+                    {id: 'n2', name: 'ISSN', parameter: 'n2'},
+                    {id: 'nu', name: 'Call Number', parameter: 'nu'}                     
                 ];
             
             /**
@@ -133,12 +133,12 @@
              * id's are the singular name of the item, lowercased
              */
             var default_search_formats  =  [
-                    {id: 'all', name: 'Everything', paramater: 'all', order:'primary'},
-                    {id: 'book', name: 'Print Books', paramater: 'Book'},
-                    {id: 'ebook', name: 'eBooks', paramater: 'Book::book_digital'},
-                    {id: 'dvd', name: 'DVDs', paramater: 'Video::video_dvd'},
-                    {id: 'journal', name: 'Journal/Magazine', paramater: 'Artchap::artchap_artcl'},
-                    {id: 'music', name: 'Musical Scores', paramater: 'Msscr'}
+                    {id: 'all', name: 'Everything', parameter: 'all', order:'primary'},
+                    {id: 'book', name: 'Print Books', parameter: 'Book'},
+                    {id: 'ebook', name: 'eBooks', parameter: 'Book::book_digital'},
+                    {id: 'dvd', name: 'DVDs', parameter: 'Video::video_dvd'},
+                    {id: 'journal', name: 'Journal/Magazine', parameter: 'Artchap::artchap_artcl'},
+                    {id: 'music', name: 'Musical Scores', parameter: 'Msscr'}
                 ];
 
         /**
@@ -156,7 +156,7 @@
             var updated_select_list = check_for_omited(default_select_options, omitted_select_options);
             
             //declare variables
-            //  {id: 'kw', name: 'Keyword', paramater: 'kw'},
+            //  {id: 'kw', name: 'Keyword', parameter: 'kw'},
             var html_select_list = [];
             var temp_label, temp_input, primary_field;
             
@@ -177,10 +177,10 @@
                 temp_input =    $('<input />')
                                     .attr({
                                         'type'  : 'radio',
-                                        'id'    : value.paramater,
+                                        'id'    : value.parameter,
                                         'name'  : search_prefix,
                                     })
-                                    .val(value.paramater);
+                                    .val(value.parameter);
                                     
                 if( value.hasOwnProperty('order') ){
                     temp_input.attr('checked', 'checked');
@@ -194,7 +194,7 @@
                                 'role'          : 'menuitem',
                                 'tabindex'      : '0',
                                 'aria-hidden'   : 'true',
-                                'for'           : value.paramater
+                                'for'           : value.parameter
                             })
                             .text(value.name)
                             .append(temp_input);
@@ -229,7 +229,7 @@
                                                     $('<span />')
                                                         .addClass( 'wms-selected-item type-'+search_prefix )
                                                         .attr({
-                                                            'data-wms_attr' : primary_field.paramater,
+                                                            'data-wms_attr' : primary_field.parameter,
                                                             'data-wms_type' : search_prefix
                                                             
                                                         })
@@ -516,9 +516,9 @@
             sortKey             : 'LIBRARY', //required
             databaseList        : '',
             collections         : [
-                {id: 'all', name: 'General Collections', paramater: 'wz:519', order:'primary'}, //required
-                {id: 'spcl', name: 'Special Collections', paramater: 'wz:519::zs:36307'},
-                {id: 'oclc', name: 'Libraries Worldwide', paramater: '&scope=wz:519'} //required 
+                {id: 'all', name: 'General Collections', parameter: 'wz:519', order:'primary'}, //required
+                {id: 'spcl', name: 'Special Collections', parameter: 'wz:519::zs:36307'},
+                {id: 'oclc', name: 'Libraries Worldwide', parameter: '&scope=wz:519'} //required 
             ]            
         },
         scoped_search_settings      : {

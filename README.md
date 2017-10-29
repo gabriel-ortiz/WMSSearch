@@ -36,15 +36,15 @@ git commit -m "Initial commit"
 - You also need the collections set: Each WMS collection contains a scope id for the main collection, ie. "wz:519", and a subscope for collections within the main collection, ie. "wz:519::zs:36307" You can find this in the URL as: "scope&subscope=wz%3A519%3A%3Azs%3A36307". For each collection, add a line to the collections array like so:
 ```javascript
     collections         : [
-        {id: 'all', name: 'General Collections', paramater: 'wz:519', order:'primary'},
-        {id: 'spcl', name: 'Special Collections', paramater: 'wz:519::zs:36307'}            
+        {id: 'all', name: 'General Collections', parameter: 'wz:519', order:'primary'},
+        {id: 'spcl', name: 'Special Collections', parameter: 'wz:519::zs:36307'}            
     ]
 ```
 *Set the primary collection with this:* `order:'primary'`
 
 ##Scoped Search setup
 
-- Scoped search is used to create a single search box that is scoped to specific paramaters. The users input will be prepended with the scoped search query in WMS.
+- Scoped search is used to create a single search box that is scoped to specific parameters. The users input will be prepended with the scoped search query in WMS.
 - To turn on the scoped search box, set scoped_searchbox to `true` 
 - Enter a scoped search query to the in the `scoped_search_collection` option. For example: `scoped_search_collection: 'su:wordpress'`
 - Want to know more about how to use search indices in WMS? [See all available attributes and property types](http://www.oclc.org/support/help/SearchingWorldCatIndexes/)
@@ -58,20 +58,20 @@ $.fn.WMSSearch.options = {
         wms_base_url        : [string, URL parameter, REQUIRED] The base of your WMS Discover configuration, this is the URL root,
         sortKey             : [string, URL parameter, REQUIRED] Determine whether results will be sorted by. Options include "LIBRARY", "BEST_MATCH", "RECENCY"
         databaseList        : [string, URL parameter, optional] List of databases prescoped in your search. If left blank, the search       will default to your default database configuration
-        collections         : [Array, Object, URL paramater, REQUIRED] Configure the collections to be searched in WMS. For each            collection added, insert an object: ` {id: 'all', name: 'General Collections', paramater: 'wz:519'}`. If no primary is set,     the plugin will default to to the first collection in this array.
+        collections         : [Array, Object, URL parameter, REQUIRED] Configure the collections to be searched in WMS. For each            collection added, insert an object: ` {id: 'all', name: 'General Collections', parameter: 'wz:519'}`. If no primary is set,     the plugin will default to to the first collection in this array.
     },
     scoped_search_settings      : {
         scoped_searchbox        : [boolean: TRUE or FALSE, optional] Setting this to TRUE will turn on the scoped searchbox interface
         scoped_search_title     : [string, optional] This is the title of your scoped searchbox
         scoped_search_desc      : [string, optional] Description that adds additional contextual information to the scoped searchbox
-        scoped_search_scoping   : [string, search paramater, REQUIRED] !important - this is the paramater that will prepend the user's     search 
-        scoped_search_collection  : [string, search paramater] ID location of the collection you are targeting
-        scoped_search_format    : [string, search paramater] Attribute type for searching. ie. keyword, title, author, etc. the             resulting search query will be prepended with that attribute search type.
-        scoped_search_boolean   : [string, search paramater] Standard boolean (AND, NOT, OR)
+        scoped_search_scoping   : [string, search parameter, REQUIRED] !important - this is the parameter that will prepend the user's     search 
+        scoped_search_collection  : [string, search parameter] ID location of the collection you are targeting
+        scoped_search_format    : [string, search parameter] Attribute type for searching. ie. keyword, title, author, etc. the             resulting search query will be prepended with that attribute search type.
+        scoped_search_boolean   : [string, search parameter] Standard boolean (AND, NOT, OR)
     },
     additional_settings :{
-        database            : [string, search paramater, REQUIRED] Set default to 'all'. Or use this to scope to a  specific database
-        author              : [string, search paramater, optional facet] scope in facets to a specific author
+        database            : [string, search parameter, REQUIRED] Set default to 'all'. Or use this to scope to a  specific database
+        author              : [string, search parameter, optional facet] scope in facets to a specific author
         year                : [string/number, facet parameter, REQUIRED ] Set detault to 'all'. Scope to specific year
         yearFrom            : [string/number, facet parameter, optional facet] Set start of scoping by year
         yearTo              : [string/number, facet parameter, optional facet] Set end of scoping by year
@@ -90,7 +90,7 @@ $.fn.WMSSearch.options = {
                                 n2 = ISSN
                                 nu = Call number
                                 
-        omit_formats        : [string, search paramaters list, optional] To remove a search format from the dropdown menu, add the         attribute ID to the array here. Options include:
+        omit_formats        : [string, search parameters list, optional] To remove a search format from the dropdown menu, add the         attribute ID to the array here. Options include:
                                 all = Everything, all format types
                                 book = Print books
                                 ebook = eBooks
@@ -113,9 +113,9 @@ $.fn.WMSSearch.options = {
         sortKey             : 'LIBRARY',
         databaseList        : '',
         collections         : [
-            {id: 'all', name: 'General Collections', paramater: 'wz:519', order:'primary'},
-            {id: 'spcl', name: 'Special Collections', paramater: 'wz:519::zs:36307'},
-            {id: 'oclc', name: 'Libraries Worldwide', paramater: '&scope=wz:519'} //required             
+            {id: 'all', name: 'General Collections', parameter: 'wz:519', order:'primary'},
+            {id: 'spcl', name: 'Special Collections', parameter: 'wz:519::zs:36307'},
+            {id: 'oclc', name: 'Libraries Worldwide', parameter: '&scope=wz:519'} //required             
         ]            
     },
     scoped_search_settings      : {
