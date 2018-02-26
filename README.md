@@ -29,7 +29,7 @@ git commit -m "Initial commit"
 
 ## Usage
 
-##Setup
+## Setup
 
 - Required defaults (without this, nothing works)
 - At the bare minimum, the plugin needs the base URL of your WMS site, ie. *https://{xyz}.on.worldcat.org/search?* (xyz is your institution ID)
@@ -42,14 +42,14 @@ git commit -m "Initial commit"
 ```
 *Set the primary collection with this:* `order:'primary'`
 
-##Scoped Search setup
+## Scoped Search setup
 
 - Scoped search is used to create a single search box that is scoped to specific parameters. The users input will be prepended with the scoped search query in WMS.
 - To turn on the scoped search box, set scoped_searchbox to `true` 
 - Enter a scoped search query to the in the `scoped_search_collection` option. For example: `scoped_search_collection: 'su:wordpress'`
 - Want to know more about how to use search indices in WMS? [See all available attributes and property types](http://www.oclc.org/support/help/SearchingWorldCatIndexes/)
 
-##Plugin Options
+## Plugin Options
 
 **Plugin Options descriptions**
 ```
