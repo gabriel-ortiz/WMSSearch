@@ -16,7 +16,10 @@
              element = element;
              
         //this is public
-        plugin.options = $.extend( true, $.fn.WMSSearch.options, UserOptions);             
+        plugin.options = $.extend( true, $.fn.WMSSearch.options, UserOptions);    
+        
+        //set the scoped search paramater to activate advanced search
+        var is_scoped_search = plugin.options.scoped_search_settings.scoped_searchbox === true ? true : false;
         
         
         /**
@@ -29,7 +32,7 @@
         var column_width;
         var search_width;
         //change column width if searchbox only
-        if( plugin.options.scoped_search_settings.scoped_searchbox === true ){
+        if( is_scoped_search ){
             search_width = 'col--md-6';
             column_width = 'col--md-3';
         }else{
@@ -113,7 +116,7 @@
              * 
              * WMS Search Attributes
              */
-            var default_search_attrs = [
+            plugin.default_search_attrs = [
                     {id: 'kw', name: 'Keyword', parameter: 'kw', order:'primary'},
                     {id: 'ti', name: 'Title', parameter: 'ti'},
                     {id: 'au', name: 'Author', parameter: 'au'},
@@ -132,7 +135,7 @@
              * 
              * id's are the singular name of the item, lowercased
              */
-            var default_search_formats  =  [
+            plugin.default_search_formats  =  [
                     {id: 'all', name: 'Everything', parameter: 'all', order:'primary'},
                     {id: 'book', name: 'Print Books', parameter: 'Book'},
                     {id: 'ebook', name: 'eBooks', parameter: 'Book::book_digital'},
@@ -212,7 +215,7 @@
                                         .attr({
                                             'tabindex'      : '0',
                                             'role'          : 'button',
-                                            'aria-label'    : 'Search Attribute'
+                                            'aria-label'    : 'Search by specifying an attribute' 
                                         })
                                         .append(
                                             //div.wms-c-selected
@@ -242,9 +245,9 @@
                                                     )  
                                             );
             //div.wms-items
-            var wms_attr_dropdown_items = $('<div />').addClass('wms-list-options')
+            var wms_attr_dropdown_items = $('<fieldset />').addClass('wms-list-options')
                                                 .attr({
-                                                    'role'          : 'menu',
+                                                    'role'          : 'dropdown list',
                                                     'aria-haspopup' : 'true'
                                                 })
                                                 //this will list out the options to be selected
@@ -252,9 +255,9 @@
             
             //return appended object to column
             //append dropdown items to div.wms-l-column wms-l-span-3-md wms-dropdown wms-search
-            wms_attr_dropdown.append(wms_attr_dropdown_items);
+            //wms_attr_dropdown.append(wms_attr_dropdown_items);
             //append everything to the second row
-            wms_search_column.append(wms_attr_dropdown);
+            wms_search_column.append(wms_attr_dropdown, wms_attr_dropdown_items);
             
             return wms_search_column;
 
@@ -285,13 +288,13 @@
             var search_string, format_key, source_location, source_key, format_value;
             
             //if scoped searchbox is turned on, the append the scope to string
-            if( plugin.options.scoped_search_settings.scoped_searchbox === true && plugin.options.scoped_search_settings.scoped_search_scoping == '' ){
+            if( is_scoped_search && plugin.options.scoped_search_settings.scoped_search_scoping == '' ){
 
                 search_string = input_array['attr'];
                 
                 source_location = plugin.options.scoped_search_settings.scoped_search_collection;
                 
-            }else if ( plugin.options.scoped_search_settings.scoped_searchbox === true){
+            }else if ( is_scoped_search){
                 
                 search_string = "(" + plugin.options.scoped_search_settings.scoped_search_scoping +") " + plugin.options.scoped_search_settings.scoped_search_boolean +" "+ input_array['attr'];
                 
@@ -356,9 +359,9 @@
             //this is the initializer  
 
             //check if scoped search has been activiated
-            if( plugin.options.scoped_search_settings.scoped_searchbox === true ){
+            if( is_scoped_search ){
                 //create attribute search module
-                var attr_search_single = generate_search_field( 'attr' , 'AS', default_search_attrs, plugin.options.additional_settings.omit_attributes );
+                var attr_search_single = generate_search_field( 'attr' , 'AS', plugin.default_search_attrs, plugin.options.additional_settings.omit_attributes );
                 
                 //append the search scoping to input row
                 wms_scoped_row_search_input
@@ -372,8 +375,8 @@
             }else{
                 //run the full search functionality
                 //create variables for search modules
-                var attr_search = generate_search_field( 'attr' , 'AS', default_search_attrs, plugin.options.additional_settings.omit_attributes );
-                var format_search = generate_search_field('frmt', 'FOR', default_search_formats , plugin.options.additional_settings.omit_formats  );
+                var attr_search = generate_search_field( 'attr' , 'AS', plugin.default_search_attrs, plugin.options.additional_settings.omit_attributes );
+                var format_search = generate_search_field('frmt', 'FOR', plugin.default_search_formats , plugin.options.additional_settings.omit_formats  );
                 var source_search = generate_search_field('src', 'IN', plugin.options.defaults.collections, plugin.options.additional_settings.omit_collections);
 
                 
@@ -387,28 +390,28 @@
             //event handlers for all actions, attached to container to ensure that DOM added elements will work
             $element
                 //show dropdown
-                .on('keypress click', '.wms-dropdown' , function(event){
+                .on('keypress click focus', '.wms-dropdown' , function(event){
                     
-                    if(event.keyCode == 13 || event.type == 'click'){
+                    //if(event.keyCode == 13 || event.type == 'click'){
                         var $this = $( this );
                         //console.log( $this );
-                        var selected_option = $this.find('.wms-list-options');
+                        var selected_option = $this.siblings('.wms-list-options');
                         var toggle_arrow = $this.find('.wms-arrow__toggle');
-                        toggle_arrow.toggleClass('toggle-up');
+                        toggle_arrow.addClass('toggle-up');
                         $('.wms-arrow__toggle').not(toggle_arrow).removeClass('toggle-up');
                         
-                        selected_option.slideToggle('fast');
+                        selected_option.slideDown('fast');
                         $('.wms-list-options').not(selected_option).slideUp('fast');
                         //console.log('first event fired');
                         
-                    }
+                    //}
                     
 
 
                 })
                 //select the item from the options list and set as data in the selected item
                 .on('click keypress', 'label.wms-select_attr', function(event){
-                    if(event.keyCode == 13 || event.type == 'click'){
+                    if(event.keyCode == 13 || event.charCode == 32 || event.type == 'click'){
 
                         //create variables of selected item
                         if(event.target.tagName == 'LABEL'){
@@ -420,16 +423,27 @@
                                 
                             //console.log( selected_attr_data );
                             //update the default with selected item
+                            
                             $this
-                                .parents('.wms-search')
-                                .find('.wms-selected-item')
-                                .text( selected_attr_name );
+                                .parents('.wms-list-options')
+                                    .siblings('.wms-dropdown')
+                                    .find('.wms-selected-item')
+                                    .text( selected_attr_name )
+                                .parents('.wms-list-options')
+                                    .slideUp('fast');
+                                    
                         
                             //stop label from triggering the slidetoggle from opening again
-                            event.stopPropagation();
+                            //event.stopPropagation();
                             
                             selected_attr_data.attr('checked', 'checked');
+                            
+                            
                         }
+                        
+                        $this
+                            .parents('.wms-list-options')
+                            .slideUp('fast');
                     }
 
                     
@@ -449,7 +463,7 @@
                     //create array of selected settings to be passed. only one query to the dom
                     var scoped_search = [];
                     
-                    if( plugin.options.scoped_search_settings.scoped_searchbox === true ){
+                    if( is_scoped_search ){
                         scoped_search['attr']   = selected_search_elements.find('input[name="attr"]:checked').attr('value') + ':' + search_input;
                         scoped_search['frmt']   = plugin.options.scoped_search_settingsscoped_search_format || 'all';
                         scoped_search['src']    = plugin.options.scoped_search_settings.scoped_search_scoping || '';
@@ -486,24 +500,24 @@
                 
             //close the dropdown if user clicks somwehere else    
             $('body').on('click', function(event){
-                        if( $(event.target).parents('.wms-dropdown').length === 0 ){
-                            $('.wms-list-options').slideUp('fast');
-                            $('.wms-arrow__toggle').removeClass('toggle-up');
-                        }
+                if( $(event.target).parents('.wms-dropdown').length === 0 ){
+                    $('.wms-list-options').slideUp('fast');
+                    $('.wms-arrow__toggle').removeClass('toggle-up');
+                }
+                        
             });
     
                 
-        };        
+        };
         
-        
+
     };
     
     $.fn.WMSSearch = function(UserOptions){
         return this.each(function(){
             if (undefined == $(this).data('WMSSearch')) {
                 var newPlugin = new $.WMSSearch(this, UserOptions);
-                    newPlugin.controller();    
-                
+                    newPlugin.controller();
                     $(this).data('WMSSearch', newPlugin);
             }
         });
@@ -518,7 +532,7 @@
             collections         : [
                 {id: 'all', name: 'General Collections', parameter: 'wz:519', order:'primary'}, //required
                 {id: 'spcl', name: 'Special Collections', parameter: 'wz:519::zs:36307'},
-                {id: 'oclc', name: 'Libraries Worldwide', parameter: '&scope=wz:519'} //required 
+                {id: 'oclc', name: 'Libraries Worldwide', parameter: 'all'} //required 
             ]            
         },
         scoped_search_settings      : {
@@ -546,4 +560,7 @@
             search_source_attr  : 'Where would you like to search. Here are different collections materials to narrow your search'
         }
     };
+    
+    
+    
 })(jQuery, window, document);

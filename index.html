@@ -31,11 +31,13 @@
         //console.log('this has been loaded');
        $('.loadWMS').WMSSearch({
             scoped_search_settings: {
-                scoped_searchbox : true,
-                scoped_search_title: 'Wordpress',
+                scoped_searchbox : false,
+                scoped_search_title: 'WordPress materials',
                 scoped_search_desc: 'All things wordpress',
-                scoped_search_scoping: 'su:wordpress',
-                scoped_search_location  : ''
+                scoped_search_scoping: 'su:wordpress'
+            },
+            additional_settings : {
+                omit_attributes : ['nu', 'bn', 'so']
             }
 
        }); 
